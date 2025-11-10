@@ -4,15 +4,20 @@
 <template>
   <v-app>
     <v-app-bar flat>
-      <v-container class="d-flex align-center">
-        <NuxtLink to="/" class="text-decoration-none text-high-emphasis">
-          <div class="font-weight-bold text-h6">Сая</div>
-        </NuxtLink>
-
-        <v-spacer></v-spacer>
-
-        <div class="d-flex align-center">
-        </div>
+      <v-container class="d-flex justify-center">
+        <v-row class="d-flex justify-center">
+          <v-col cols="8" xl="5" lg="4" class="d-flex justify-space-between">
+            <NuxtLink to="/">
+              О нас
+            </NuxtLink>
+            <NuxtLink to="/">
+              Контакты
+            </NuxtLink>
+            <NuxtLink to="/">
+              Меню
+            </NuxtLink>
+          </v-col>
+        </v-row>
       </v-container>
     </v-app-bar>
 
