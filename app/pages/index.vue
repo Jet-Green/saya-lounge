@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 <template>
   <v-row>
-    <v-col class="full-height-block">
+    <v-col class="full-height-block" cols="12">
       <v-img src=" /images/first-section.png" class="h-100 d-flex justify-center align-center" draggable="false" cover>
         <v-row class="d-flex justify-center align-center">
           <v-col cols="12" class="d-flex justify-center align-center mb-16">
@@ -14,6 +14,17 @@
           </v-col>
         </v-row>
       </v-img>
+    </v-col>
+
+    <v-col class="full-height-block" cols="12">
+      <v-row>
+        <v-col cols="12" md="6">
+          <h1>BOOKING</h1>
+        </v-col>
+        <v-col cols="12" md="6">
+          white-cocktail.png
+        </v-col>
+      </v-row>
     </v-col>
   </v-row>
 </template>
