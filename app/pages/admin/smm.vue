@@ -1,0 +1,78 @@
+<script setup lang="ts">
+definePageMeta({
+  layout: "smm"
+})
+
+const message = ref<string>("")
+const result = ref<string>("")
+const loading = ref<boolean>(false)
+
+async function sendPrompt() {
+  if (!message.value.trim()) return
+
+  loading.value = true
+  result.value = ""
+
+  const { data } = await useFetch<any>("/api/smm-ai", {
+    method: "POST",
+    body: { message: message.value.trim() }
+  })
+
+  console.log(data);
+
+
+  result.value = data.value?.content || ""
+  loading.value = false
+  message.value = ""
+}
+</script>
+
+<template>
+  <v-row>
+    <v-col cols="12" class="ai-container">
+      <div class="result-container">
+        <div v-if="loading" class="d-flex justify-center align-center h-100">
+          <v-progress-circular indeterminate color="primary"></v-progress-circular>
+        </div>
+
+        <div v-else-if="result" class="post-content" v-html="result"></div>
+
+        <div v-else class="d-flex justify-center align-center h-100">
+          <h1>Сделать пост, написать текст</h1>
+        </div>
+      </div>
+
+      <div class="w-100 pb-8 px-8 pt-2 d-flex align-center">
+        <v-text-field v-model="message" class="w-100" placeholder="Введите ваш запрос" variant="outlined" hide-details
+          @keyup.enter="sendPrompt"></v-text-field>
+        <v-btn icon="mdi-send" class="ml-4" variant="tonal" @click="sendPrompt"
+          :disabled="!message.trim() || loading"></v-btn>
+      </div>
+    </v-col>
+  </v-row>
+</template>
+
+<style scoped lang="scss">
+.ai-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.result-container {
+  height: 80vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  overflow-y: scroll;
+  padding: 16px;
+  box-sizing: border-box;
+
+  .post-content {
+    width: 100%;
+    white-space: pre-wrap;
+  }
+}
+</style>
