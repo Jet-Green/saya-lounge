@@ -1,6 +1,7 @@
 <script setup lang="ts">
 definePageMeta({
-  layout: "smm"
+  layout: "admin",
+  middleware: "admin"
 })
 
 const message = ref<string>("")
@@ -69,7 +70,7 @@ async function sendPrompt() {
 
 <style scoped lang="scss">
 .ai-container {
-  height: 100vh;
+  height: 80vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -77,7 +78,7 @@ async function sendPrompt() {
 }
 
 .result-container {
-  height: 80vh;
+  height: 100%;
   width: 100%;
   display: flex;
   justify-content: center;

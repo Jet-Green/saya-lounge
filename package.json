@@ -15,9 +15,11 @@
     "@mdi/font": "^7.4.47",
     "langchain": "^1.1.1",
     "nuxt": "^4.2.1",
+    "vee-validate": "^4.15.1",
     "vite-plugin-vuetify": "^2.1.2",
     "vue": "^3.5.22",
     "vue-router": "^4.6.3",
+    "vue3-toastify": "^0.2.8",
     "vuetify": "^3.10.9",
     "vuetify-nuxt-module": "^0.18.8"
   },

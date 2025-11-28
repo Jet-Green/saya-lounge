@@ -7,6 +7,11 @@ export default defineNuxtConfig({
   build: {
     transpile: ['vuetify'],
   },
+  runtimeConfig: {
+    public: {
+      apiBase: process.env.NUXT_PUBLIC_API_BASE,
+    },
+  },
   css: ["@/assets/styles/main.css", "@/assets/styles/fonts.css"],
   modules: [
     (_options, nuxt) => {
@@ -16,4 +21,7 @@ export default defineNuxtConfig({
       })
     },
   ],
+  routeRules: {
+    '/admin/**': { ssr: false },
+  },
 })
