@@ -34,7 +34,7 @@ const login = handleSubmit(async values => {
 
   loading.value = false
   if (res?.status?.value == "success") {
-    router.push(`/me`)
+    router.push(`/admin`)
   }
 })
 
