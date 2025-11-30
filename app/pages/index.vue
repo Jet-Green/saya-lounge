@@ -74,7 +74,7 @@ function justifyClass(justify: string) {
     </v-col> -->
 
     <v-col class="full-height-block" cols="12">
-      <v-img src=" /images/first-section.png" class="h-100 d-flex justify-center align-center" draggable="false" cover>
+      <v-img src=" /images/first-section.jpg" class="h-100 d-flex justify-center align-center user-select-none" draggable="false" cover>
         <v-row class="d-flex justify-center align-center">
           <v-col cols="12" class="d-flex justify-center align-center mb-16">
             <v-img src="/icons/logo.png" height="256px" draggable="false" class="user-select-none"></v-img>
@@ -102,14 +102,15 @@ function justifyClass(justify: string) {
               <a href="tel:+79581413321">✆&nbsp;+7&nbsp;958&nbsp;141‑33‑21</a>
             </h2>
 
-            <v-col class="pt-2">
-              <v-btn class="booking-btn" href="https://t.me/" target="_blank">
-              Провести свое мероприятие
+            <v-col class="pt-8">
+              <v-btn class="btn-black-background" href="https://t.me/" target="_blank">
+                Провести свое мероприятие
               </v-btn>
             </v-col>
             
           </v-col>
         </v-col>
+
         <v-col cols="12" md="6" class="d-flex justify-center align-center pt-2 pa-8">
           <v-img src="/images/dark-cocktail.jpg" class="h-100 d-flex justify-center align-center user-select-none"
             draggable="false"></v-img>
@@ -118,27 +119,13 @@ function justifyClass(justify: string) {
     </v-col>
 
     <v-col cols="12">
-      <v-row class="py-8" justify="center">
-        <v-col cols="12" class="video-container pa-0">
-          <video src="/videos/saya-video-compressed.mp4" autoplay muted loop playsinline draggable="false" class = "video-hero-banner"></video>
-        </v-col>
-      </v-row>
-
       <v-row>
         <v-col cols="12" md="12" class="d-flex justify-center align-center pa-8">
           <v-col cols="12" md="9" class="justify-center align-center">
-            <!-- <h1>«САЯ»&nbsp;—&nbsp;это тень, в которой вкус раскрывается иначе.</h1> -->
             <h2>
-              Лаундж-бар «Сая»: Пристанище в тени
-              <br>
-              <br>
-              Забудьте о суете. Вы входите в другой мир.
-              <br>
-              <br>
-              Лаундж-бар «Сая» — это измерение, где время замедляется, а тревоги остаются за порогом. Наше название, означающее «тень» с тюркского, — это не просто слово, а суть всего, что вас окружает. Это мягкий полумрак, уютные уголки и глубина, в которой можно укрыться.
-              <br>
-              <br>
-              Прикоснитесь к нашей тайне. У входа вас встречают кости таинственных существ — древний оберег, знак того, что здесь царит свой закон, а гости находятся под защитой. Это предвестие уникального опыта, который ждет вас внутри.
+              САЯ — место вашей личной тишины среди городского шума<br>
+              Лаундж-бар САЯ — новое концептуальное заведение от бренд-шефа Александра Ежова. Это пространство, где время замедляет свой бег, чтобы вы смогли обрести внутренне равновесие и перезагрузить чувства.<br>
+              В интерьере глубокие, обволакивающие тона, игра света и тени, этнические артефакты и уникальные предметы искусства, которые создают атмосферу полной приватности и расслабления. Здесь вы остаетесь наедине с беседой, вкусами и своими мыслями.
             </h2>
           </v-col>
         </v-col>
@@ -146,29 +133,67 @@ function justifyClass(justify: string) {
     </v-col>
 
     <v-col cols="12">
-      <v-row>
-        <v-col cols="12" md="6" class="d-flex justify-center align-center pa-8">
-          <v-img src="/images/hand-cocktail-shrimp.jpg" class="h-100 user-select-none" draggable="false" contain></v-img>
-        </v-col>
+      <v-img src=" /images/shrimp-comp.jpg" class="h-100 d-flex justify-center align-center" draggable="false" cover>
+        <v-row class="d-flex justify-start align-start">
+          <v-col cols="12" md="6" class="d-flex justify-center align-center pa-8">
+            <v-col cols="12" md="10" class="justify-center align-center">
+              <h1>Бар</h1>
+              <h2>
+                <br>
+                Бармены со скрупулезной точностью исполняют ритуалы приготовления напитков.<br>
+                <br>
+                Каждый коктейль — это зашифрованное послание, а каждый вечер — новое путешествие вглубь собственных ощущений.<br>
+                <br>
+                Наша барная карта – это виртуозно составленная коллекция напитков со всего мира, где каждая позиция подобрана для вашего идеального вечера.
+              </h2>
+            </v-col>
+          </v-col>
+        </v-row>
 
-        <v-col cols="12" md="6" class="d-flex flex-column justify-center align-center pa-8">
-          <h2>
-            Сая — хозяйка и дух этого места.
-            <br>
-            <br>
-            Она лесная нимфа, дух чащи, которая воплотилась здесь.<br>
-            Она рождена из тени.
-            <br>
-            <br>
-            Загадочная, как лесная полночь.
-            <br>
-            <br>
-            Она проводит гостей через их вечер, очаровывая и удивляя.
-          </h2>
+        <v-row class="d-flex justify-end align-end">
+          <v-col cols="12" md="6" class="d-flex justify-end align-center pa-8">
+            <v-col cols="12" md="10" class="justify-center align-center py-8">
+              <h2>
+                Не знаешь, что заказать?
+                <br>
+                Сая поможет!
+              </h2>
+
+              <v-col cols="12" md="10" class="d-flex align-center py-8">
+                <v-btn class="btn-transparent-background btn-choice-cocktail" href="https://t.me/" target="_blank">
+                  Подобрать напиток
+                </v-btn>
+              </v-col>
+
+              <h3>
+                На основе искуственного интеллекта подберем напиток из раздела “Бар”, учитывая ваши предпочтения
+              </h3>
+            </v-col>
+          </v-col>
+        </v-row>
+      </v-img>
+    </v-col>
+
+    <v-col cols="12">
+      <v-row>
+        <v-col cols="12" md="12" class="d-flex justify-center align-center pa-8">
+          <v-col cols="12" md="9" class="justify-center align-center">
+            <h1>Интерьер</h1>
+            <h2>
+              <br>
+              Интерьер в этно-стиле, созданный известным дизайнером Ириной Райхер, погружает гостей в атмосферу таинственности: у входа вас встречают кости-оберегиневиданных животных и уникальные полотна, созданные современной художницей по мотивам древних ручных тканей.
+              <br>
+              Деревянные скульптуры выполненные из цельного куска дерева белорусским мастером воплощают в себе силу природы.
+              <br>
+              <br>
+              Оригинальные светильники отбрасывают загадочные тени и смягчают свет. Росписи на стенах завораживают, ведь в их причудливых линиях можно разглядеть и птицу, и ската, и насекомое, а также собственные символы и знаки. Барная стойка – особый артефакт, созданный вручную и испещренный древними посланиями предков. САЯ – это погружение в первобытный вневременной мир, где каждый гость считывает свою историю, находясь внутри нее.
+            </h2>
+          </v-col>
         </v-col>
       </v-row>
     </v-col>
 
+    <!-- Карусель фоток -->
     <v-col cols="12" class="py-8">
       <div class="gallery-wrapper">
         <div v-if="hasPages" class="gallery-pages">
@@ -208,74 +233,35 @@ function justifyClass(justify: string) {
 
     <v-col cols="12">
       <v-row>
-        <v-col cols="12" md="6" class="d-flex justify-center align-center pa-8">
-          <v-col cols="12" md="10" class="justify-center align-center py-8">
+        <v-col cols="12" md="12" class="d-flex justify-center align-center pa-8">
+          <v-col cols="12" md="9" class="justify-center align-center">
+            <h1>Гастрономия</h1>
             <h2>
-              Не знаешь, что заказать?
               <br>
-              Сая поможет!
-              <br>
-              <br>
-              Подберем тебе
-              <br>
-              "тот самый" напиток
+              Кухня под руководством бренд-шефа Александра Ежова предлагает гастрономические композиции, которые станут идеальным сопровождением к бокалу редкого виски или авторскому коктейлю.
             </h2>
-
-            <v-col cols="12" md="10" class="d-flex align-center py-8">
-              <v-btn class="try-btn" href="https://t.me/" target="_blank">
-              ПОПРОБОВАТЬ!
-              </v-btn>
-            </v-col>
-
-            <h3 class="gray-text">
-              На основе искуственного интеллекта подберем напиток из раздела “Бар”, учитывая ваши предпочтения
-            </h3>
           </v-col>
-        </v-col>
-        <v-col cols="12" md="6" class="d-flex justify-center align-center pa-8">
-          <v-img src="/images/hand-up.jpg" class="h-100 d-flex justify-center align-center user-select-none"
-            draggable="false"></v-img>
         </v-col>
       </v-row>
     </v-col>
 
-    <v-col cols="12">
-      <v-row>
-        <v-col cols="4" md="4" class="d-flex justify-center align-center pa-4">
-            <v-btn class="flower-btn" href="https://t.me/" target="_blank">
+    <v-col class="py-8" cols="12">
+      <v-img src="/images/wall-background.jpg" class="h-100 d-flex justify-center align-center" draggable="false" cover>
+        <v-row class="d-flex justify-center align-start">
+
+          <v-col cols="12" md="6" class="d-flex justify-center align-center pa-4">
+            <v-btn class="btn-transparent-background" href="https://t.me/" target="_blank">
               БАР
             </v-btn>
-        </v-col>
+          </v-col>
 
-        <v-col cols="4" md="4" class="d-flex justify-center align-center">
-          <v-img src="/icons/saya-flower.png" draggable="false" class="user-select-none flower-icon"></v-img>
-        </v-col>
-
-        <v-col cols="4" md="4" class="d-flex justify-center align-center pa-4">
-            <v-btn class="flower-btn" href="https://t.me/" target="_blank">
+          <v-col cols="12" md="6" class="d-flex justify-center align-center pa-4">
+            <v-btn class="btn-transparent-background" href="https://t.me/" target="_blank">
               МЕНЮ
             </v-btn>
-        </v-col>
-      </v-row>
-    </v-col>
-
-    <v-col class="full-height-block py-8" cols="12">
-      <v-img src="/images/wall-background.png" class="h-100 d-flex justify-center align-end" draggable="false" cover>
-        <v-row class="d-flex justify-center align-start">
-          
-          <v-col cols="6" class="d-flex justify-center align-center pa-8">
-            <h2 class="bar-text">
-              Илья — шеф-бармен
-            </h2>
           </v-col>
 
-          <v-col cols="6" class="d-flex justify-center align-center pa-8">
-            <h2 class="bar-text">
-              Дмитрий — бармен
-            </h2>
-          </v-col>
-
-          <v-spacer style="height: 230px;"></v-spacer>
+          <!-- <v-spacer style="height: 230px;"></v-spacer> -->
         </v-row>
       </v-img>
     </v-col>
@@ -297,7 +283,8 @@ function justifyClass(justify: string) {
   text-underline-offset: 2px !important;
 }
 
-.booking-btn {
+// Кнопка с черным фоном и белой рамкой
+.btn-black-background {
   transition: 0.25s;
   border-radius: 32px !important;
   text-transform: none !important;
@@ -311,12 +298,50 @@ function justifyClass(justify: string) {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  width: max-content !important;
+
+  // width: max-content !important;
+  width: clamp(180px, fit-content(50%), 400px) !important;
+  // width: 100% !important;
+
+  border: 2px solid white !important;
 }
 
-.booking-btn:hover {
+.btn-black-background:hover {
   background-color: white !important;
   color: black !important;
+}
+
+// Кнопка с прозрачным фоном и серой рамкой
+.btn-transparent-background {
+  transition: 0.25s;
+  border-radius: 32px !important;
+  text-transform: none !important;
+  font-size: clamp(1rem, 0.7rem + 1.2vw, 1.5rem);
+  font-weight: 400;
+
+  padding: 24px 48px !important;
+  height: clamp(56px, 6vw, 64px) !important;
+  line-height: 1 !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  // width: max-content !important;
+  width: clamp(120px, 30vw, 300px) !important;
+
+  border: 2px solid #bababa !important;
+  background-color: transparent;
+}
+
+.btn-transparent-background:hover {
+  background-color: white !important;
+  color: black !important;
+}
+
+.btn-choice-cocktail {
+  border: 2px solid white !important;
+  width: max-content !important;
 }
 
 .video-container {
@@ -362,30 +387,6 @@ function justifyClass(justify: string) {
 
 .gray-text {
   color: #575757;
-}
-
-.flower-btn {
-  transition: 0.25s;
-  border-radius: 32px !important;
-  text-transform: none !important;
-  font-size: clamp(1rem, 0.7rem + 1.2vw, 1.5rem);
-  font-weight: 400;
-
-  padding: 24px 48px !important;
-  height: clamp(56px, 6vw, 64px) !important;
-  line-height: 1 !important;
-
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  width: clamp(200px, 40vw, 320px) !important;
-
-  border: 2px solid #bababa !important;
-}
-
-.flower-btn:hover {
-  background-color: white !important;
-  color: black !important;
 }
 
 .flower-icon {
