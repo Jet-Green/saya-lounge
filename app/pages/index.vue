@@ -6,6 +6,7 @@ import { useSwipe } from '@/composables/useSwipe'
 import { useAutoScroll } from '@/composables/useAutoScroll'
 import { useImageOverlay } from '@/composables/useImageOverlay'
 
+
 const props = defineProps<{ rowsPerPage?: number }>()
 const rowsPerPage = props.rowsPerPage ?? 2
 
@@ -72,16 +73,17 @@ function justifyClass(justify: string) {
       <v-img src="/images/first-section.png" class="h-100 d-flex justify-center align-center" draggable="false" cover>
       </v-img>
     </v-col> -->
-
-    <v-col class="full-height-block" cols="12">
-      <v-img src=" /images/first-section.jpg" class="h-100 d-flex justify-center align-center user-select-none" draggable="false" cover>
-        <v-row class="d-flex justify-center align-center">
-          <v-col cols="12" class="d-flex justify-center align-center mb-16">
-            <v-img src="/icons/logo.png" height="256px" draggable="false" class="user-select-none"></v-img>
-          </v-col>
-        </v-row>
-      </v-img>
-    </v-col>
+    <template>
+        <v-col class="full-height-block" cols="12">
+          <v-img src=" /images/first-section.jpg" class="h-100 d-flex justify-center align-center user-select-none" draggable="false" cover gradient="to bottom, rgba(0,0,0,0.65), rgba(0,0,0,0.65)">
+            <v-row class="d-flex justify-center align-center">
+              <v-col cols="12" class="d-flex justify-center align-center mb-16">
+                <v-img src="/icons/logo.png" height="256px" draggable="false" class="user-select-none"  :style="{height: 'clamp(12.5rem, 2.5568rem + 28.4091vw, 25rem)' , width: 'auto', maxWidth: 'min(90vw, 400px)'}"></v-img>
+              </v-col>
+            </v-row>
+          </v-img>  
+        </v-col>
+    </template>
 
     <v-col cols="12">
       <v-row>
