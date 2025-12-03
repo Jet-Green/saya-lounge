@@ -85,37 +85,56 @@ function justifyClass(justify: string) {
         </v-col>
     </template>
 
-    <v-col cols="12">
+    <v-col cols="11" md="11" class="justify-center align-center">
       <v-row>
         <v-col cols="12" md="6" class="d-flex justify-center align-center pa-8">
-          <v-col cols="12" md="10" class="justify-center align-center py-8">
-            <h1>BOOKING</h1>
-            <h2>
-              <br>
-              Время работы:<br>
-              <br>
-              Пн‑Чт&nbsp;12:00&nbsp;—&nbsp;24:00<br>
-              Пт&nbsp;12:00&nbsp;—&nbsp;2:00<br>
-              Сб&nbsp;14:00&nbsp;—&nbsp;2:00<br>
-              Вс&nbsp;14:00&nbsp;—&nbsp;24:00<br>
-              <br>
-              Вы можете забронировать стол в САЯ:<br>
-              <a href="https://t.me/" class="telegram-link">Telegram</a><br>
-              <a href="tel:+79581413321">✆&nbsp;+7&nbsp;958&nbsp;141‑33‑21</a>
-            </h2>
+          <v-col cols="12" md="8" class="justify-center align-center py-8" >
+            <div style="max-width: 400px; margin: 0 auto;">
+              <h1 style="font-size: clamp(1.75rem, 4vw, 2.25rem);">BOOKING</h1>
+                <div style="font-size: clamp(1.75rem, 4vw, 2.25rem); line-height: 1.6;">
+                  <h2>
+                    <br>
+                    Время работы:<br>
+                    <br>
+                    Пн‑Чт&nbsp;12:00&nbsp;—&nbsp;24:00<br>
+                    Пт&nbsp;12:00&nbsp;—&nbsp;2:00<br>
+                    Сб&nbsp;14:00&nbsp;—&nbsp;2:00<br>
+                    Вс&nbsp;14:00&nbsp;—&nbsp;24:00<br>
+                    <br>
+                    Вы можете забронировать стол в САЯ:<br>
+                    <a href="https://t.me/" class="telegram-link">Telegram</a><br>
+                    <a href="tel:+79581413321">✆&nbsp;+7&nbsp;958&nbsp;141‑33‑21</a>
+                  </h2>
 
-            <v-col class="pt-8">
-              <v-btn class="btn-black-background" href="https://t.me/" target="_blank">
-                Провести свое мероприятие
-              </v-btn>
-            </v-col>
-            
+                  <v-col class="pt-8">
+                    <v-btn class="btn-black-background" href="https://t.me/" target="_blank" :style="{
+                        fontSize: 'clamp(1rem, 1.5vw, 1.5rem)',
+                        padding: 'clamp(4px, 2vw, 8px) clamp(16px, 4vw, 32px)',
+                        whiteSpace: 'normal',
+                        lineHeight: '1.4',
+                        minHeight: 'clamp(44px, 8vw, 56px)',
+                        height: 'auto',
+                        textAlign: 'center'
+                      }">
+                      <span style="display: inline-block; max-width: 100%;">
+                        Провести свое мероприятие
+                      </span>
+                    </v-btn>
+                  </v-col>
+                </div>
+            </div>
           </v-col>
         </v-col>
 
-        <v-col cols="12" md="6" class="d-flex justify-center align-center pt-2 pa-8">
-          <v-img src="/images/dark-cocktail.jpg" class="h-100 d-flex justify-center align-center user-select-none"
-            draggable="false"></v-img>
+        <v-col cols="12" md="6" class="d-flex justify-center pt-2 pa-8">
+            <v-img src="/images/dark-cocktail.jpg" class="h-100 d-flex justify-center align-center user-select-none"
+              draggable="false"
+              :style="{
+            width: '100%',
+            maxWidth: '1000px',
+            height: 'clamp(500px, 100vh, 1500px)'
+          }">
+            </v-img>
         </v-col>
       </v-row>
     </v-col>
@@ -288,7 +307,7 @@ function justifyClass(justify: string) {
 // Кнопка с черным фоном и белой рамкой
 .btn-black-background {
   transition: 0.25s;
-  border-radius: 32px !important;
+  border-radius: 64px !important;
   text-transform: none !important;
   font-size: clamp(1rem, 0.7rem + 1.2vw, 1.5rem);
   font-weight: 400;
@@ -306,6 +325,13 @@ function justifyClass(justify: string) {
   // width: 100% !important;
 
   border: 2px solid white !important;
+}
+
+@media (max-width: 600px) {
+.btn-black-background{
+  padding: 16px !important;
+  border: 1px solid white !important;
+}
 }
 
 .btn-black-background:hover {
