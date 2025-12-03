@@ -108,7 +108,7 @@ function justifyClass(justify: string) {
 
                   <v-col class="pt-8">
                     <v-btn class="btn-black-background" href="https://t.me/" target="_blank" :style="{
-                        fontSize: 'clamp(1rem, 1.5vw, 1.5rem)',
+                        fontSize: 'clamp(1rem, 1.5vw, 1.25rem)',
                         padding: 'clamp(4px, 2vw, 8px) clamp(16px, 4vw, 32px)',
                         whiteSpace: 'normal',
                         lineHeight: '1.4',
