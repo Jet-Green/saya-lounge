@@ -1,180 +1,111 @@
 <script setup lang="ts">
 const prompt = ref('')
-const response = ref('')
-const loading = ref(false)
-const error = ref('')
 
-const preferences = ref({
-  strength: [] as string[],
-  taste: [] as string[],
-  volume: [] as string[],
-  price: [] as string[]
-})
-
-const options = {
-  strength: ['крепкие', 'средние', 'низкие', 'безалкогольные'],
-  taste: ['кислые', 'цитрус', 'фруктовые', 'ягодные', 'сладкие', 'десертные', 'горькие', 'травяные', 'свежие', 'пряные', 'дымные', 'медовые', 'ореховые', 'кофейные', 'чайные'],
-  volume: ['короткие 30–60 мл', 'коктейли до 200 мл', 'лонгдринки 350–400 мл'],
-  price: ['доступные', 'средние', 'премиум']
-}
-
-function buildPrompt() {
-  const parts = []
-  
-  if (preferences.value.strength.length) parts.push(`Крепость: ${preferences.value.strength.join(', ')}`)
-  if (preferences.value.taste.length) parts.push(`Вкус: ${preferences.value.taste.join(', ')}`)
-  if (preferences.value.volume.length) parts.push(`Объём: ${preferences.value.volume.join(', ')}`)
-  if (preferences.value.price.length) parts.push(`Цена: ${preferences.value.price.join(', ')}`)
-  
-  if (prompt.value.trim()) parts.push(prompt.value.trim())
-  
-  return parts.join('. ')
-}
+const { preferences, options, buildPrompt } = useCocktailSelector()
+const { response, loading, error, sendRequest } = useGigachat()
 
 async function testGigachat() {
-  const finalPrompt = buildPrompt()
-  if (!finalPrompt) return
-  
-  loading.value = true
-  error.value = ''
-  response.value = ''
-  
-  try {
-    const res: any = await $fetch('/api/gigachat', {
-      method: 'POST',
-      body: { prompt: finalPrompt }
-    })
-    
-    response.value = res?.choices?.[0]?.message?.content || JSON.stringify(res, null, 2)
-  } catch (err: any) {
-    error.value = err?.data?.error || err.message || 'Ошибка запроса'
-  } finally {
-    loading.value = false
-  }
+  const finalPrompt = buildPrompt(prompt.value)
+  await sendRequest(finalPrompt)
 }
 </script>
 
 <template>
-  <v-container>
-    <v-row justify="center">
+  <v-row>
+    <v-col cols="12" class="d-flex justify-center align-center pa-8">
       <v-col cols="12" md="8">
-        <v-sheet rounded="lg" class="pa-6">
-          <h1 class="text-h4 mb-6">Подбор коктейля</h1>
+        <v-row>
+          <v-col cols="12" class="mb-6">
+            <h1 class="text-h4">Подбор коктейля</h1>
+          </v-col>
           
-          <div class="mb-6">
-            <h3 class="text-h6 mb-3">Крепость / тип алкоголя</h3>
-            <v-chip-group
-              v-model="preferences.strength"
-              multiple
-              column
-            >
-              <v-chip
-                v-for="option in options.strength"
-                :key="option"
-                :value="option"
-                filter
-                variant="outlined"
-              >
-                {{ option }}
-              </v-chip>
-            </v-chip-group>
-          </div>
+          <v-col cols="12" class="mb-6">
+            <v-row>
+              <v-col cols="12" class="mb-3">
+                <h2>Крепость / тип алкоголя</h2>
+              </v-col>
+              <v-col cols="12">
+                <v-chip-group v-model="preferences.strength" multiple column>
+                  <v-chip v-for="option in options.strength" :key="option" :value="option" filter variant="outlined" size="large">
+                    {{ option }}
+                  </v-chip>
+                </v-chip-group>
+              </v-col>
+            </v-row>
+          </v-col>
           
-          <div class="mb-6">
-            <h3 class="text-h6 mb-3">Вкус / аромат</h3>
-            <v-chip-group
-              v-model="preferences.taste"
-              multiple
-              column
-            >
-              <v-chip
-                v-for="option in options.taste"
-                :key="option"
-                :value="option"
-                filter
-                variant="outlined"
-              >
-                {{ option }}
-              </v-chip>
-            </v-chip-group>
-          </div>
+          <v-col cols="12" class="mb-6">
+            <v-row>
+              <v-col cols="12" class="mb-3">
+                <h2>Вкус / аромат</h2>
+              </v-col>
+              <v-col cols="12">
+                <v-chip-group v-model="preferences.taste" multiple column>
+                  <v-chip v-for="option in options.taste" :key="option" :value="option" filter variant="outlined" size="large">
+                    {{ option }}
+                  </v-chip>
+                </v-chip-group>
+              </v-col>
+            </v-row>
+          </v-col>
           
-          <div class="mb-6">
-            <h3 class="text-h6 mb-3">Объём / подача</h3>
-            <v-chip-group
-              v-model="preferences.volume"
-              multiple
-              column
-            >
-              <v-chip
-                v-for="option in options.volume"
-                :key="option"
-                :value="option"
-                filter
-                variant="outlined"
-              >
-                {{ option }}
-              </v-chip>
-            </v-chip-group>
-          </div>
+          <v-col cols="12" class="mb-6">
+            <v-row>
+              <v-col cols="12" class="mb-3">
+                <h2>Объём / подача</h2>
+              </v-col>
+              <v-col cols="12">
+                <v-chip-group v-model="preferences.volume" multiple column>
+                  <v-chip v-for="option in options.volume" :key="option" :value="option" filter variant="outlined" size="large">
+                    {{ option }}
+                  </v-chip>
+                </v-chip-group>
+              </v-col>
+            </v-row>
+          </v-col>
           
-          <div class="mb-6">
-            <h3 class="text-h6 mb-3">Цена</h3>
-            <v-chip-group
-              v-model="preferences.price"
-              multiple
-              column
-            >
-              <v-chip
-                v-for="option in options.price"
-                :key="option"
-                :value="option"
-                filter
-                variant="outlined"
-              >
-                {{ option }}
-              </v-chip>
-            </v-chip-group>
-          </div>
+          <v-col cols="12" class="mb-6">
+            <v-row>
+              <v-col cols="12" class="mb-3">
+                <h2>Цена</h2>
+              </v-col>
+              <v-col cols="12">
+                <v-chip-group v-model="preferences.price" multiple column>
+                  <v-chip v-for="option in options.price" :key="option" :value="option" filter variant="outlined" size="large">
+                    {{ option }}
+                  </v-chip>
+                </v-chip-group>
+              </v-col>
+            </v-row>
+          </v-col>
           
-          <v-textarea
-            v-model="prompt"
-            label="Дополнительные пожелания (необязательно)"
-            rows="2"
-            variant="outlined"
-            maxlength="100"
-            counter
-            class="mb-4"
-          />
+          <v-col cols="12" class="mb-4">
+            <v-textarea v-model="prompt" label="Дополнительные пожелания (необязательно)" rows="2" variant="outlined" maxlength="100" counter />
+          </v-col>
           
-          <v-btn
-            color="primary"
-            :loading="loading"
-            @click="testGigachat"
-            block
-            size="large"
-          >
-            Подобрать коктейль
-          </v-btn>
+          <v-col cols="12">
+            <v-btn color="primary" :loading="loading" @click="testGigachat" block size="large">
+              Подобрать коктейль
+            </v-btn>
+          </v-col>
           
-          <v-alert
-            v-if="error"
-            type="error"
-            class="mt-4"
-          >
-            {{ error }}
-          </v-alert>
+          <v-col v-if="error" cols="12" class="mt-4">
+            <v-alert type="error">
+              {{ error }}
+            </v-alert>
+          </v-col>
           
-          <v-sheet
-            v-if="response"
-            color="grey-lighten-4"
-            rounded="lg"
-            class="pa-4 mt-4"
-          >
-            <div class="text-body-1">{{ response }}</div>
-          </v-sheet>
-        </v-sheet>
+          <v-col v-if="response" cols="12" class="mt-4">
+            <v-sheet color="grey-lighten-4" rounded="lg" class="pa-4">
+              <v-row>
+                <v-col cols="12">
+                  <h2 class="text-body-1">{{ response }}</h2>
+                </v-col>
+              </v-row>
+            </v-sheet>
+          </v-col>
+        </v-row>
       </v-col>
-    </v-row>
-  </v-container>
+    </v-col>
+  </v-row>
 </template>
