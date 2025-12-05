@@ -1,7 +1,8 @@
 import { ref } from 'vue'
+import type { ICocktail } from '~/types/ICocktail.interface'
 
 export function useGigachat() {
-  const response = ref('')
+  const response = ref<ICocktail[]>([])
   const loading = ref(false)
   const error = ref('')
 
@@ -10,15 +11,15 @@ export function useGigachat() {
 
     loading.value = true
     error.value = ''
-    response.value = ''
+    response.value = []
 
     try {
-      const res: any = await $fetch('/api/gigachat', {
+      const res: ICocktail[] = await $fetch('/api/gigachat', {
         method: 'POST',
         body: { prompt }
       })
 
-      response.value = res?.choices?.[0]?.message?.content || JSON.stringify(res, null, 2)
+      response.value = res
     } catch (err: any) {
       error.value = err?.data?.error || err.message || 'Ошибка запроса'
     } finally {
@@ -27,7 +28,7 @@ export function useGigachat() {
   }
 
   function clearResponse() {
-    response.value = ''
+    response.value = []
     error.value = ''
   }
 

@@ -1,7 +1,8 @@
 import { defineEventHandler, readBody, setResponseStatus } from 'h3'
 import https from 'node:https'
 import { randomUUID } from 'crypto'
-import { SYSTEM_PROMPT } from '../utils/gigachat-prompts'
+import { generateSystemPrompt } from '../utils/gigachat-prompts'
+import { getById } from '../utils/cocktails'
 
 type AuthResponse = {
   access_token?: string
@@ -54,7 +55,7 @@ async function httpsRequest<T>(url: string, options: any): Promise<T> {
 
 async function getAccessToken(): Promise<string> {
   const now = Date.now()
-  
+
   if (cachedToken && cachedToken.expiresAt > now) {
     return cachedToken.token
   }
@@ -76,7 +77,7 @@ async function getAccessToken(): Promise<string> {
 
   const expiresIn = authRes.expires_in || 1800
   cachedToken = { token, expiresAt: now + (expiresIn - 30) * 1000 }
-  
+
   return token
 }
 
@@ -89,7 +90,7 @@ export default defineEventHandler(async (event) => {
 
     const body = await readBody<GigachatRequestBody>(event)
     const prompt = body?.prompt
-    
+
     if (!prompt || typeof prompt !== 'string') {
       setResponseStatus(event, 400)
       return { error: 'prompt is required' }
@@ -97,7 +98,7 @@ export default defineEventHandler(async (event) => {
 
     const token = await getAccessToken()
 
-    const chatResponse = await httpsRequest(API_URL, {
+    const chatResponse = await httpsRequest<any>(API_URL, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,
@@ -107,14 +108,18 @@ export default defineEventHandler(async (event) => {
       body: JSON.stringify({
         model: body.model || 'GigaChat-Pro',
         messages: [
-          { role: 'system', content: SYSTEM_PROMPT },
+          { role: 'system', content: generateSystemPrompt() },
           { role: 'user', content: prompt }
         ],
         temperature: body.temperature || 1.0,
       }),
     })
 
-    return chatResponse
+    let content = chatResponse?.choices?.[0]?.message?.content;
+
+    let cocktailIds = content.split(",").map((_id: string) => Number(_id))
+
+    return cocktailIds.map((_id: number) => getById(_id))
   } catch (err: any) {
     console.error('gigachat.post error:', err)
     setResponseStatus(event, 500)
