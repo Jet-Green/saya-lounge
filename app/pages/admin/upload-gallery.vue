@@ -130,7 +130,7 @@ const confirmDelete = async () => {
         <v-progress-linear v-if="galleryLoading" indeterminate color="primary" class="mb-4"/>
         <v-row v-if="galleryItems.length > 0" dense justify="center" class="gallery-row">
           <v-col v-for="item in galleryItems" :key="item.key" cols="6" sm="4" md="3" lg="2" class="mb-4">
-            <v-img :src="item.url" :alt="item.key" aspect-ratio="1" class="gallery-img" cover draggable="false"/>
+            <v-img :src="item.url" :alt="item.key" aspect-ratio="1" class="gallery-img" cover draggable="false" lazy/>
             <v-btn class="mt-2 btn-danger-background" block :loading="deletingKey === item.key" :disabled="deletingKey === item.key" @click="openDeleteDialog(item.key)">
               Удалить
             </v-btn>
