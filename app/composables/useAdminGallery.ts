@@ -38,11 +38,61 @@ export const useAdminGallery = () => {
     }, 5000)
   }
 
+  const galleryItems = ref<any[]>([])
+  const galleryLoading = ref(false)
+  const galleryError = ref('')
+  const deletingKey = ref<string | null>(null)
+
+  const fetchGallery = async () => {
+    galleryLoading.value = true
+    galleryError.value = ''
+    try {
+      const res = await $fetch('/api/ya-cloud/list-gallery', {
+        method: 'GET',
+        params: { limit: 100 },
+      })
+      galleryItems.value = res.items || []
+    } catch (e) {
+      galleryError.value = 'Ошибка загрузки галереи'
+    } finally {
+      galleryLoading.value = false
+    }
+  }
+
+  const deleteGalleryItem = async (key: string) => {
+    if (!key) return
+    deletingKey.value = key
+    galleryError.value = ''
+
+    try {
+      const res: any = await $fetch('/api/ya-cloud/delete-photo-gallery', {
+        method: 'POST',
+        body: { key },
+      })
+
+      if (!res?.success) {
+        throw new Error(res?.error || 'Delete failed')
+      }
+
+      galleryItems.value = galleryItems.value.filter((item) => item.key !== key)
+    } catch (e) {
+      galleryError.value = 'Ошибка удаления файла'
+    } finally {
+      deletingKey.value = null
+    }
+  }
+
   return {
     uploading,
     uploadedCount,
     totalFiles,
     successMessage,
     uploadFiles,
+    galleryItems,
+    galleryLoading,
+    galleryError,
+    fetchGallery,
+    deleteGalleryItem,
+    deletingKey,
   }
 }

@@ -4,7 +4,21 @@ definePageMeta({
   middleware: "admin"
 })
 
-const { uploading, uploadedCount, totalFiles, successMessage, uploadFiles } = useAdminGallery()
+
+
+const { uploading, uploadedCount, totalFiles, successMessage, uploadFiles, galleryItems, galleryLoading, galleryError, fetchGallery, deleteGalleryItem, deletingKey } = useAdminGallery()
+
+onMounted(fetchGallery)
+
+// Автоматическое обновление галерии после загрузки файлов
+watch(
+  () => uploading.value,
+  (newVal, oldVal) => {
+    if (oldVal && !newVal) {
+      fetchGallery()
+    }
+  }
+)
 
 const isDragOver = ref(false)
 const fileInput = ref<HTMLInputElement>()
@@ -48,6 +62,26 @@ const handleFileSelect = (event: Event) => {
 const openFileDialog = () => {
   fileInput.value?.click()
 }
+
+const deleteDialogOpen = ref(false)
+const deleteDialogKey = ref<string | null>(null)
+
+const openDeleteDialog = (key: string) => {
+  deleteDialogKey.value = key
+  deleteDialogOpen.value = true
+}
+
+const cancelDelete = () => {
+  deleteDialogOpen.value = false
+  deleteDialogKey.value = null
+}
+
+const confirmDelete = async () => {
+  if (!deleteDialogKey.value) return
+  await deleteGalleryItem(deleteDialogKey.value)
+  deleteDialogOpen.value = false
+  deleteDialogKey.value = null
+}
 </script>
 
 <template>
@@ -89,6 +123,34 @@ const openFileDialog = () => {
         </v-sheet>
       </v-col>
     </v-row>
+    <v-row class="mt-8">
+      <v-col cols="12">
+        <h2 class="mb-4 text-center py-4">Галерея</h2>
+        <v-alert v-if="galleryError" type="error" class="mb-4">{{ galleryError }}</v-alert>
+        <v-progress-linear v-if="galleryLoading" indeterminate color="primary" class="mb-4"/>
+        <v-row v-if="galleryItems.length > 0" dense justify="center" class="gallery-row">
+          <v-col v-for="item in galleryItems" :key="item.key" cols="6" sm="4" md="3" lg="2" class="mb-4">
+            <v-img :src="item.url" :alt="item.key" aspect-ratio="1" class="gallery-img" cover draggable="false"/>
+            <v-btn class="mt-2 btn-danger-background" block :loading="deletingKey === item.key" :disabled="deletingKey === item.key" @click="openDeleteDialog(item.key)">
+              Удалить
+            </v-btn>
+          </v-col>
+        </v-row>
+        <div v-else-if="!galleryLoading && !galleryError" class="text-center text-grey">Нет изображений в галерее</div>
+      </v-col>
+    </v-row>
+
+    <v-dialog v-model="deleteDialogOpen" max-width="420">
+      <v-card>
+        <v-card-title class="text-center">Удалить фото?</v-card-title>
+        <v-card-actions class="pa-4 d-flex justify-space-between">
+          <v-btn variant="flat" color="white" class="btn-cancel" @click="cancelDelete" :disabled="!!deletingKey">Отмена</v-btn>
+          <v-btn color="error" variant="flat" @click="confirmDelete" :loading="!!deletingKey" :disabled="!!deletingKey">
+            Удалить
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>
 
@@ -155,4 +217,55 @@ const openFileDialog = () => {
   background-color: #646464 !important;
   color: white !important;
 }
+
+.btn-danger-background {
+  transition: 0.25s;
+  border-radius: 28px !important;
+  text-transform: none !important;
+  font-size: clamp(0.9rem, 0.65rem + 0.8vw, 1rem);
+  font-weight: 600;
+
+  padding: 12px 20px !important;
+  min-height: 44px;
+
+  border: 2px solid #d32f2f !important;
+  background-color: #fff !important;
+  color: #d32f2f !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06) !important;
+}
+
+.btn-danger-background:hover {
+  background-color: #d32f2f !important;
+  color: #fff !important;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12) !important;
+}
+
+.btn-cancel {
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  color: #555 !important;
+  background-color: #fff !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06) !important;
+}
+
+.btn-cancel:hover {
+  background-color: #f3f3f3 !important;
+  color: #222 !important;
+}
+
+.gallery-row {
+  column-gap: 12px;
+  justify-content: center;
+}
 </style>
+
+.gallery-img {
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: box-shadow 0.2s;
+  max-width: 140px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.gallery-img:hover {
+  box-shadow: 0 6px 24px rgba(0,0,0,0.18);
+}
