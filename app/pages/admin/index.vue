@@ -12,6 +12,13 @@ const sections = [
     to: '/admin/smm',
     color: 'primary'
   },
+  {
+    title: 'Фотографии для галереи',
+    description: 'Загрузить, удалить картинки с главного экрана',
+    icon: 'mdi-image-edit-outline',
+    to: '/admin/upload-gallery',
+    color: 'primary'
+  },
 ]
 </script>
 

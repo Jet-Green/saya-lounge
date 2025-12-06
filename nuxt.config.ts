@@ -8,6 +8,9 @@ export default defineNuxtConfig({
     transpile: ['vuetify'],
   },
   runtimeConfig: {
+    ycAccessKeyId: process.env.YC_KEY_ID,
+    ycSecretAccessKey: process.env.YC_SECRET,
+    ycBucket: process.env.YC_BUCKET,
     public: {
       apiBase: process.env.NUXT_PUBLIC_API_BASE,
     },
