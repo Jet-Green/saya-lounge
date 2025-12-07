@@ -10,7 +10,12 @@ import { useImageOverlay } from '@/composables/useImageOverlay'
 const props = defineProps<{ rowsPerPage?: number }>()
 const rowsPerPage = props.rowsPerPage ?? 2
 
-const { images } = useGallery()
+const { images, loading, error, fetchGallery } = useGallery()
+
+// Загрузка галереи
+onMounted(() => {
+  fetchGallery()
+})
 
 const {
   pages,

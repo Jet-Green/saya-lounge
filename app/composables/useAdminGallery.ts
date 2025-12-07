@@ -49,7 +49,7 @@ export const useAdminGallery = () => {
     try {
       const res = await $fetch('/api/ya-cloud/list-gallery', {
         method: 'GET',
-        params: { limit: 100 },
+        params: { limit: 1000 },
       })
       galleryItems.value = res.items || []
     } catch (e) {
