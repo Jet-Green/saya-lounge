@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const route = useRoute()
+const isAdmin = computed(() => route.path.startsWith('/admin'))
 </script>
 
 <template>
@@ -21,7 +23,7 @@
       </v-container>
     </v-app-bar>
 
-    <v-main>
+    <v-main :class="isAdmin ? 'admin-page' : 'home-page'">
       <slot />
     </v-main>
 
