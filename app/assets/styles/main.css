@@ -44,3 +44,48 @@ h3 {
   font-size: clamp(1rem, 0.7rem + 1.2vw, 1.5rem);
   font-weight: 400;
 }
+
+/*
+.btn-black-background {
+  transition: 0.25s;
+  border-radius: 64px !important;
+  text-transform: none !important;
+  font-size: clamp(1rem, 0.7rem + 1.2vw, 1.5rem);
+  font-weight: 400;
+
+  padding: 32px !important;
+  min-height: auto !important;
+  line-height: 1 !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  width: clamp(180px, fit-content(50%), 400px) !important;
+
+  border: 2px solid white !important;
+}
+
+@media (max-width: 600px) {
+  .btn-black-background {
+    padding: 16px !important;
+    border: 1px solid white !important;
+  }
+}
+
+.btn-black-background:hover {
+  background-color: white !important;
+  color: black !important;
+}
+*/
+.transparent-bg {
+  background: transparent !important;
+}
+
+.full-height-block {
+  height: calc(100vh - 90px);
+}
+
+.user-select-none {
+  user-select: none;
+}

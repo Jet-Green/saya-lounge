@@ -2,6 +2,7 @@ import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  css: ["@/assets/styles/main.css", "@/assets/styles/fonts.css"],
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
   build: {
@@ -15,7 +16,6 @@ export default defineNuxtConfig({
       apiBase: process.env.NUXT_PUBLIC_API_BASE,
     },
   },
-  css: ["@/assets/styles/main.css", "@/assets/styles/fonts.css"],
   modules: [
     (_options, nuxt) => {
       nuxt.hooks.hook('vite:extendConfig', (config) => {

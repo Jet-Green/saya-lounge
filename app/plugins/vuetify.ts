@@ -35,11 +35,22 @@ export default defineNuxtPlugin((nuxtApp) => {
       },
     },
     defaults: {
-      // VBtn: {
-      //   style: 'text-transform: none; letter-spacing: normal',
-      // },
+      VBtn: {
+        style:
+          `
+          text-transform: none;
+          border: 2px solid white;
+          letter-spacing: normal;
+          border-radius: 100px;
+          display: flex;
+          min-width: 250px;
+          padding: 0 32px;
+          font-size: clamp(1.125rem, 0.8267rem + 0.8523vw, 1.5rem); /* 18px-24px*/
+          height: clamp(4.375rem, 2.8835rem + 4.2614vw, 6.25rem);
+          `,
+      },
       global: {
-        ripple: false,
+        // ripple: false,
       },
       VRow: {
         class: 'pa-0 ma-0',
