@@ -66,12 +66,6 @@
   </v-row>
 </template>
 <style scoped lang="scss">
-.telegram-link {
-  text-decoration: underline !important;
-  text-decoration-thickness: 1px !important;
-  text-underline-offset: 2px !important;
-}
-
 .img-background {
   min-height: 80vh;
   background:

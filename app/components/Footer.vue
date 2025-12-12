@@ -11,21 +11,22 @@ function scrollToTop() {
     <v-row>
       <v-col cols="12">
         <v-row>
-          <v-col cols="12" md="6" class="d-flex justify-center align-center pa-8">
+          <v-col cols="12" md="6" class="d-flex justify-center align-center">
             <h3>
               г. Пермь, ул. Пермская, 33<br>
               +7 (958) 14 13 321<br>
-              <a href="https://t.me/saya_bar" target="_blank">Telegram: @saya_bar</a><br>
+              <NuxtLink href="https://t.me/SayaLounge" class="telegram-link" target="_blank">Telegram: @SayaLounge
+              </NuxtLink><br>
               <br>
               Время работы:<br>
               Пн-Чт 12:00 — 24:00<br>
               Пт 12:00 — 2:00<br>
               Сб 14:00 — 2:00<br>
               Вс 14:00 — 24:00
-              </h3>
+            </h3>
           </v-col>
 
-          <v-col cols="12" md="6" class="d-flex justify-center align-center pt-2 pa-8">
+          <v-col cols="12" md="6" class="d-flex justify-center align-center" style="margin: 20px;">
             <v-btn class="btn-black-background" @click="scrollToTop">
               Вернуться наверх
               <v-icon right>mdi-arrow-up-thin</v-icon>
@@ -38,7 +39,6 @@ function scrollToTop() {
 </template>
 
 <style scoped>
-
 /* Кнопка с черным фоном и белой рамкой */
 .btn-black-background {
   transition: 0.25s;
@@ -66,5 +66,4 @@ function scrollToTop() {
   /* background-color: white !important; */
   /* color: black !important; */
 }
-
 </style>

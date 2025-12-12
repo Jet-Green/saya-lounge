@@ -113,3 +113,8 @@ h3 {
   height: 40px !important;
   padding: 0 20px !important;
 }
+.telegram-link {
+  text-decoration: underline !important;
+  text-decoration-thickness: 1px !important;
+  text-underline-offset: 2px !important;
+}

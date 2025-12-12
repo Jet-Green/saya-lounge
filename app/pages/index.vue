@@ -91,11 +91,11 @@ function justifyClass(justify: string) {
     </v-col>
 
 
-    <v-col cols="12" style="margin: 100px 0 !important;">
+    <v-col cols="12">
       <LandingBooking />
     </v-col>
 
-    <v-col cols="12" style="margin: 100px 0 !important;">
+    <v-col cols="12" style="margin: clamp(3.125rem, -10.2083rem + 20.8333vw, 6.25rem) 0 !important;">
       <v-row class="d-flex justify-center py-8">
         <v-col cols="11" md="9" class="justify-center align-center">
           <h2>
@@ -116,28 +116,26 @@ function justifyClass(justify: string) {
     <!-- margin in the component -->
     <LandingBar />
 
-    <v-col cols="12">
-      <v-row>
-        <v-col cols="12" md="12" class="d-flex justify-center align-center pa-8">
-          <v-col cols="12" md="9" class="justify-center align-center">
-            <h1>Интерьер</h1>
-            <h2>
-              <br>
-              Интерьер в этно-стиле, созданный известным дизайнером Ириной Райхер, погружает гостей в атмосферу
-              таинственности: у входа вас встречают кости-оберегиневиданных животных и уникальные полотна, созданные
-              современной художницей по мотивам древних ручных тканей.
-              <br>
-              Деревянные скульптуры выполненные из цельного куска дерева белорусским мастером воплощают в себе силу
-              природы.
-              <br>
-              <br>
-              Оригинальные светильники отбрасывают загадочные тени и смягчают свет. Росписи на стенах завораживают, ведь
-              в
-              их причудливых линиях можно разглядеть и птицу, и ската, и насекомое, а также собственные символы и знаки.
-              Барная стойка – особый артефакт, созданный вручную и испещренный древними посланиями предков. САЯ – это
-              погружение в первобытный вневременной мир, где каждый гость считывает свою историю, находясь внутри нее.
-            </h2>
-          </v-col>
+    <v-col cols="12" style="margin: clamp(3.125rem, -10.2083rem + 20.8333vw, 6.25rem) 0 !important;">
+      <v-row class="d-flex justify-center">
+        <v-col cols="11" md="9" class="justify-center align-center">
+          <h1>Интерьер</h1>
+          <h2>
+            <br>
+            Интерьер в этно-стиле, созданный известным дизайнером Ириной Райхер, погружает гостей в атмосферу
+            таинственности: у входа вас встречают кости-оберегиневиданных животных и уникальные полотна, созданные
+            современной художницей по мотивам древних ручных тканей.
+            <br>
+            Деревянные скульптуры выполненные из цельного куска дерева белорусским мастером воплощают в себе силу
+            природы.
+            <br>
+            <br>
+            Оригинальные светильники отбрасывают загадочные тени и смягчают свет. Росписи на стенах завораживают, ведь
+            в
+            их причудливых линиях можно разглядеть и птицу, и ската, и насекомое, а также собственные символы и знаки.
+            Барная стойка – особый артефакт, созданный вручную и испещренный древними посланиями предков. САЯ – это
+            погружение в первобытный вневременной мир, где каждый гость считывает свою историю, находясь внутри нее.
+          </h2>
         </v-col>
       </v-row>
     </v-col>
@@ -180,55 +178,43 @@ function justifyClass(justify: string) {
       </div>
     </v-overlay>
 
-    <v-col cols="12">
-      <v-row>
-        <v-col cols="12" md="12" class="d-flex justify-center align-center pa-8">
-          <v-col cols="12" md="9" class="justify-center align-center">
-            <h1>Гастрономия</h1>
-            <h2>
-              <br>
-              Кухня под руководством бренд-шефа Александра Ежова предлагает гастрономические композиции, которые станут
-              идеальным сопровождением к бокалу редкого виски или авторскому коктейлю.
-            </h2>
-          </v-col>
+    <v-col cols="12" style="margin: clamp(3.125rem, -10.2083rem + 20.8333vw, 6.25rem) 0 !important;">
+      <v-row class="d-flex justify-center align-center">
+        <v-col cols="11" md="9">
+          <h1>Гастрономия</h1>
+          <h2>
+            <br>
+            Кухня под руководством бренд-шефа Александра Ежова предлагает гастрономические композиции, которые станут
+            идеальным сопровождением к бокалу редкого виски или авторскому коктейлю.
+          </h2>
         </v-col>
       </v-row>
     </v-col>
 
     <v-col class="py-8" cols="12">
-      <v-img src="/images/wall-background.jpg" class="h-100 d-flex justify-center align-center" draggable="false" cover>
+      <v-parallax src="/images/wall-background.jpg" class="h-100 d-flex justify-center align-center" draggable="false"
+        cover>
         <v-row class="d-flex justify-center align-start">
 
-          <v-col cols="12" md="6" class="d-flex justify-center align-center pa-4">
+          <v-col cols="12" md="6" class="d-flex justify-center align-center pa-4"
+            style="margin: clamp(3.125rem, -10.2083rem + 20.8333vw, 6.25rem) 0 !important;">
             <v-btn class="transparent-bg" href="https://t.me/" target="_blank">
               БАР
             </v-btn>
           </v-col>
 
-          <v-col cols="12" md="6" class="d-flex justify-center align-center pa-4">
+          <v-col cols="12" md="6" class="d-flex justify-center align-center pa-4"
+            style="margin: clamp(3.125rem, -10.2083rem + 20.8333vw, 6.25rem) 0 !important;">
             <v-btn class="transparent-bg" href="https://t.me/" target="_blank">
               МЕНЮ
             </v-btn>
           </v-col>
-
-          <!-- <v-spacer style="height: 230px;"></v-spacer> -->
         </v-row>
-      </v-img>
+      </v-parallax>
     </v-col>
-
   </v-row>
 </template>
 <style scoped lang="scss">
-.spacer-margin {
-  margin: 100px 0 !important;
-}
-
-@media (max-width: 1024px) {
-  .spacer-margin {
-    margin: 50px 0 !important;
-  }
-}
-
 .btn-choice-cocktail {
   border: 2px solid white !important;
   width: max-content !important;
