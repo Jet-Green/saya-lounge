@@ -15,11 +15,13 @@ interface Props {
   loading: boolean
   error: string
   deletingKey: string | null
+  movingKey: string | null
 }
 
 interface Emits {
   (e: 'upload', files: File[]): void
   (e: 'delete', key: string): void
+  (e: 'move', key: string, direction: 'left' | 'right'): void
 }
 
 defineProps<Props>()
@@ -85,6 +87,10 @@ const confirmDelete = () => {
   deleteDialogOpen.value = false
   deleteDialogKey.value = null
 }
+
+const movePhoto = (key: string, direction: 'left' | 'right') => {
+  emit('move', key, direction)
+}
 </script>
 
 <template>
@@ -135,9 +141,33 @@ const confirmDelete = () => {
         <v-alert v-if="error" type="error" class="mb-4">{{ error }}</v-alert>
         <v-progress-linear v-if="loading" indeterminate color="primary" class="mb-4"/>
         <v-row v-if="items.length > 0" dense justify="center" class="gallery-row">
-          <v-col v-for="item in items" :key="item.key" cols="6" sm="4" md="3" lg="2" class="mb-4">
-            <v-img :src="item.url" :alt="item.key" aspect-ratio="1" class="gallery-img" cover draggable="false" lazy/>
-            <v-btn class="mt-2 btn-danger-background" block :loading="deletingKey === item.key" :disabled="deletingKey === item.key" @click="openDeleteDialog(item.key)">
+          <v-col v-for="(item, index) in items" :key="item.key" cols="6" sm="4" md="3" lg="2" class="mb-4">
+            <div class="gallery-item-wrapper">
+              <v-img :src="item.url" :alt="item.key" aspect-ratio="1" class="gallery-img" cover draggable="false" lazy/>
+              <div class="gallery-controls">
+                <v-btn 
+                  icon 
+                  size="small" 
+                  class="btn-move"
+                  :disabled="index === 0 || deletingKey === item.key || movingKey !== null"
+                  :loading="movingKey === item.key"
+                  @click="movePhoto(item.key, 'left')"
+                >
+                  <v-icon>mdi-chevron-left</v-icon>
+                </v-btn>
+                <v-btn 
+                  icon 
+                  size="small" 
+                  class="btn-move"
+                  :disabled="index === items.length - 1 || deletingKey === item.key || movingKey !== null"
+                  :loading="movingKey === item.key"
+                  @click="movePhoto(item.key, 'right')"
+                >
+                  <v-icon>mdi-chevron-right</v-icon>
+                </v-btn>
+              </div>
+            </div>
+            <v-btn class="mt-2 btn-danger-background" block :loading="deletingKey === item.key" :disabled="deletingKey === item.key || movingKey !== null" @click="openDeleteDialog(item.key)">
               Удалить
             </v-btn>
           </v-col>
@@ -259,20 +289,60 @@ const confirmDelete = () => {
 }
 
 .gallery-row {
-  column-gap: 12px;
+  column-gap: 24px;
   justify-content: center;
+}
+
+.gallery-item-wrapper {
+  position: relative;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .gallery-img {
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
   transition: box-shadow 0.2s;
-  max-width: 140px;
-  margin-left: auto;
-  margin-right: auto;
+  width: 100%;
+  display: block;
 }
 
 .gallery-img:hover {
   box-shadow: 0 6px 24px rgba(0,0,0,0.18);
+}
+
+.gallery-controls {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  pointer-events: auto;
+  padding: 0 8px;
+}
+
+.btn-move {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  color: #000 !important;
+  border: 2px solid #000 !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
+  transition: 0.2s !important;
+}
+
+.btn-move:hover:not(:disabled) {
+  background-color: #000 !important;
+  color: #fff !important;
+  border-color: #fff !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6) !important;
+  transform: scale(1.15);
+}
+
+.btn-move:disabled {
+  opacity: 0.3 !important;
+  background-color: rgba(200, 200, 200, 0.5) !important;
+  border-color: rgba(150, 150, 150, 0.5) !important;
 }
 </style>

@@ -4,7 +4,7 @@ definePageMeta({
   middleware: "admin"
 })
 
-const { uploading, uploadedCount, totalFiles, successMessage, uploadFiles, menuItems, menuLoading, menuError, fetchMenu, deleteMenuItem, deletingKey } = useAdminMenu()
+const { uploading, uploadedCount, totalFiles, successMessage, uploadFiles, menuItems, menuLoading, menuError, fetchMenu, deleteMenuItem, moveMenuItem, deletingKey, movingKey } = useAdminMenu()
 
 onMounted(fetchMenu)
 
@@ -21,7 +21,7 @@ watch(
 <template>
   <AdminPhotoUpload
     title="Фотографии меню"
-    description="Формат названия файла: номер.описание.расширение. Примеры: 1.основное блюдо.jpg, 2.напиток.png"
+    description=""
     :uploading="uploading"
     :uploaded-count="uploadedCount"
     :total-files="totalFiles"
@@ -30,8 +30,10 @@ watch(
     :loading="menuLoading"
     :error="menuError"
     :deleting-key="deletingKey"
+    :moving-key="movingKey"
     @upload="uploadFiles"
     @delete="deleteMenuItem"
+    @move="moveMenuItem"
   />
 
   

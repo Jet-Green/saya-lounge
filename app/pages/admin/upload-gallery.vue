@@ -4,7 +4,7 @@ definePageMeta({
   middleware: "admin"
 })
 
-const { uploading, uploadedCount, totalFiles, successMessage, uploadFiles, galleryItems, galleryLoading, galleryError, fetchGallery, deleteGalleryItem, deletingKey } = useAdminGallery()
+const { uploading, uploadedCount, totalFiles, successMessage, uploadFiles, galleryItems, galleryLoading, galleryError, fetchGallery, deleteGalleryItem, moveGalleryItem, deletingKey, movingKey } = useAdminGallery()
 
 onMounted(fetchGallery)
 
@@ -29,7 +29,9 @@ watch(
     :loading="galleryLoading"
     :error="galleryError"
     :deleting-key="deletingKey"
+    :moving-key="movingKey"
     @upload="uploadFiles"
     @delete="deleteGalleryItem"
+    @move="moveGalleryItem"
   />
 </template>

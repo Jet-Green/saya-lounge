@@ -9,8 +9,10 @@ export const useAdminBar = () => {
     loading: barLoading, 
     error: barError, 
     fetchItems: fetchBar, 
-    deleteItem: deleteBarItem, 
-    deletingKey 
+    deleteItem: deleteBarItem,
+    moveItem: moveBarItem,
+    deletingKey,
+    movingKey
   } = useAdminPhotos('bar')
 
   return {
@@ -24,6 +26,8 @@ export const useAdminBar = () => {
     barError,
     fetchBar,
     deleteBarItem,
+    moveBarItem,
     deletingKey,
+    movingKey,
   }
 }

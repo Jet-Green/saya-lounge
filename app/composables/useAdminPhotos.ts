@@ -29,6 +29,16 @@ export const useAdminPhotos = (folder: 'gallery' | 'menu' | 'bar') => {
 
     await Promise.all(uploadPromises)
 
+    // Переиндексируем файлы после загрузки
+    try {
+      await $fetch('/api/ya-cloud/reindex-gallery', {
+        method: 'POST',
+        body: { folder },
+      })
+    } catch (error) {
+      console.error('Reindex error:', error)
+    }
+
     uploading.value = false
     successMessage.value = `Успешно загружено ${uploadedCount.value} из ${totalFiles.value} файлов`
     
@@ -41,6 +51,7 @@ export const useAdminPhotos = (folder: 'gallery' | 'menu' | 'bar') => {
   const loading = ref(false)
   const error = ref('')
   const deletingKey = ref<string | null>(null)
+  const movingKey = ref<string | null>(null)
 
   const extractFileName = (key: string): string => {
     const parts = key.split('/')
@@ -70,7 +81,7 @@ export const useAdminPhotos = (folder: 'gallery' | 'menu' | 'bar') => {
     try {
       const res = await $fetch('/api/ya-cloud/list-gallery', {
         method: 'GET',
-        params: { limit: 1000, folder },
+        params: { limit: 10000, folder },
       })
       items.value = sortByFileName(res.items || [])
     } catch (e) {
@@ -88,18 +99,112 @@ export const useAdminPhotos = (folder: 'gallery' | 'menu' | 'bar') => {
     try {
       const res: any = await $fetch('/api/ya-cloud/delete-photo-gallery', {
         method: 'POST',
-        body: { key },
+        body: { key, folder },
       })
 
       if (!res?.success) {
         throw new Error(res?.error || 'Delete failed')
       }
 
-      items.value = items.value.filter((item) => item.key !== key)
+      await fetchItems()
     } catch (e) {
       error.value = 'Ошибка удаления файла'
     } finally {
       deletingKey.value = null
+    }
+  }
+
+  const moveItem = async (key: string, direction: 'left' | 'right') => {
+    if (movingKey.value !== null) return
+    
+    error.value = ''
+    movingKey.value = key
+    
+    const sortedItems = [...items.value]
+    const currentIndex = sortedItems.findIndex((item) => item.key === key)
+
+    if (currentIndex === -1) {
+      movingKey.value = null
+      return
+    }
+
+    const swapIndex = direction === 'left' ? currentIndex - 1 : currentIndex + 1
+
+    if (swapIndex < 0 || swapIndex >= sortedItems.length) {
+      movingKey.value = null
+      return
+    }
+
+    const currentItem = sortedItems[currentIndex]
+    const swapItem = sortedItems[swapIndex]
+
+    try {
+      // Извлекаем компоненты имени файла (формат: число.uuid.расширение)
+      const parseFileName = (fileKey: string) => {
+        const fileName = fileKey.split('/').pop() || ''
+        const parts = fileName.split('.')
+        return {
+          number: parts[0],
+          uuid: parts[1],
+          ext: parts[2],
+          folder: fileKey.split('/')[0],
+        }
+      }
+
+      const current = parseFileName(currentItem.key)
+      const swap = parseFileName(swapItem.key)
+
+      // Используем временное очень большое число для промежуточного файла
+      const tempKey = `${current.folder}/999999.${current.uuid}.${current.ext}`
+      const currentNewKey = `${current.folder}/${swap.number}.${current.uuid}.${current.ext}`
+      const swapNewKey = `${swap.folder}/${current.number}.${swap.uuid}.${swap.ext}`
+
+      // Шаг 1: Переименовываем текущий в промежуточное имя
+      let res: any = await $fetch('/api/ya-cloud/rename-photo-gallery', {
+        method: 'POST',
+        body: { oldKey: currentItem.key, newKey: tempKey },
+      })
+
+      if (!res?.success) {
+        throw new Error(`Move step 1 failed: ${res?.error || 'Unknown error'}`)
+      }
+
+      // Шаг 2: Переименовываем соседний в номер текущего
+      res = await $fetch('/api/ya-cloud/rename-photo-gallery', {
+        method: 'POST',
+        body: { oldKey: swapItem.key, newKey: swapNewKey },
+      })
+
+      if (!res?.success) {
+        // Откатываем первую операцию
+        await $fetch('/api/ya-cloud/rename-photo-gallery', {
+          method: 'POST',
+          body: { oldKey: tempKey, newKey: currentItem.key },
+        })
+        throw new Error(`Move step 2 failed: ${res?.error || 'Unknown error'}`)
+      }
+
+      // Шаг 3: Переименовываем промежуточный в номер соседа
+      res = await $fetch('/api/ya-cloud/rename-photo-gallery', {
+        method: 'POST',
+        body: { oldKey: tempKey, newKey: currentNewKey },
+      })
+
+      if (!res?.success) {
+        // Откатываем: возвращаем на места
+        await $fetch('/api/ya-cloud/rename-photo-gallery', {
+          method: 'POST',
+          body: { oldKey: swapNewKey, newKey: swapItem.key },
+        })
+        throw new Error(`Move step 3 failed: ${res?.error || 'Unknown error'}`)
+      }
+
+      await fetchItems()
+    } catch (e) {
+      error.value = 'Ошибка при перемещении файла'
+      await fetchItems()
+    } finally {
+      movingKey.value = null
     }
   }
 
@@ -114,6 +219,8 @@ export const useAdminPhotos = (folder: 'gallery' | 'menu' | 'bar') => {
     error,
     fetchItems,
     deleteItem,
+    moveItem,
     deletingKey,
+    movingKey,
   }
 }

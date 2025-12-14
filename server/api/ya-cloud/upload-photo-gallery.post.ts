@@ -20,14 +20,14 @@ export default defineEventHandler(async (event) => {
   const { folder = 'gallery' } = getQuery(event)
   const folderName = typeof folder === 'string' ? folder : 'gallery'
 
-  const filename = file.filename || 'file'
-  const ext = filename.split('.').pop() || 'jpg'
-  const basename = filename.substring(0, filename.lastIndexOf('.')) || 'file'
-  const uuid = randomUUID()
-  const key = `${folderName}/${basename}-${uuid}.${ext}`
-
-
   try {
+    const filename = file.filename || 'file'
+    const ext = filename.split('.').pop() || 'jpg'
+    const uuid = randomUUID()
+    // Используем большой рандомный номер для новых файлов, потом переиндексируем
+    const timestamp = Date.now()
+    const key = `${folderName}/${timestamp}.${uuid}.${ext}`
+
     await s3.send(
       new PutObjectCommand({
         Bucket: bucket,

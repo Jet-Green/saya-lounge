@@ -9,8 +9,10 @@ export const useAdminMenu = () => {
     loading: menuLoading, 
     error: menuError, 
     fetchItems: fetchMenu, 
-    deleteItem: deleteMenuItem, 
-    deletingKey 
+    deleteItem: deleteMenuItem,
+    moveItem: moveMenuItem,
+    deletingKey,
+    movingKey 
   } = useAdminPhotos('menu')
 
   return {
@@ -24,6 +26,8 @@ export const useAdminMenu = () => {
     menuError,
     fetchMenu,
     deleteMenuItem,
+    moveMenuItem,
     deletingKey,
+    movingKey,
   }
 }
