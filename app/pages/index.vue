@@ -91,7 +91,7 @@ function justifyClass(justify: string) {
     </v-col>
 
 
-    <v-col cols="12">
+    <v-col cols="12" id="contacts">
       <LandingBooking />
     </v-col>
 
@@ -191,9 +191,7 @@ function justifyClass(justify: string) {
       </v-row>
     </v-col>
 
-    <!-- anchor for navigation -->
     <v-col class="py-8" cols="12">
-      <div></div>
       <v-parallax id="menu-bar" src="/images/wall-background.jpg" class="h-100 d-flex justify-center align-center"
         draggable="false" cover>
         <v-row class="d-flex justify-center align-start">

@@ -8,7 +8,7 @@ function scrollToTop() {
 
 <template>
   <v-footer padless>
-    <v-row id="contacts" class="d-flex justify-center">
+    <v-row class="d-flex justify-center">
       <v-col cols="11" md="9">
         <v-row class="d-flex justify-space-between">
           <v-col cols="12" md="6" class="d-flex justify-start">
