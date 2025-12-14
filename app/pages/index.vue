@@ -96,7 +96,7 @@ function justifyClass(justify: string) {
     </v-col>
 
     <v-col cols="12" style="margin: clamp(3.125rem, -10.2083rem + 20.8333vw, 6.25rem) 0 !important;">
-      <v-row class="d-flex justify-center py-8">
+      <v-row id="about-us" class="d-flex justify-center py-8">
         <v-col cols="11" md="9" class="justify-center align-center">
           <h2>
             САЯ — место вашей личной тишины среди городского шума<br>
@@ -191,9 +191,11 @@ function justifyClass(justify: string) {
       </v-row>
     </v-col>
 
+    <!-- anchor for navigation -->
     <v-col class="py-8" cols="12">
-      <v-parallax src="/images/wall-background.jpg" class="h-100 d-flex justify-center align-center" draggable="false"
-        cover>
+      <div></div>
+      <v-parallax id="menu-bar" src="/images/wall-background.jpg" class="h-100 d-flex justify-center align-center"
+        draggable="false" cover>
         <v-row class="d-flex justify-center align-start">
 
           <!-- <v-col cols="12" md="6" class="d-flex justify-center align-center pa-4"

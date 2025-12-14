@@ -9,13 +9,13 @@ const isAdmin = computed(() => route.path.startsWith('/admin'))
       <v-container class="d-flex justify-center">
         <v-row class="d-flex justify-center">
           <v-col cols="8" xl="5" lg="4" class="d-flex justify-space-between">
-            <NuxtLink to="/">
+            <NuxtLink to="/#about-us">
               О нас
             </NuxtLink>
-            <NuxtLink to="/menu">
+            <NuxtLink to="/#menu-bar">
               Меню
             </NuxtLink>
-            <NuxtLink to="/">
+            <NuxtLink to="/#contacts">
               Контакты
             </NuxtLink>
           </v-col>

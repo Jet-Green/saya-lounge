@@ -8,13 +8,13 @@ function scrollToTop() {
 
 <template>
   <v-footer padless>
-    <v-row>
-      <v-col cols="12">
-        <v-row>
-          <v-col cols="12" md="6" class="d-flex justify-center align-center">
+    <v-row id="contacts" class="d-flex justify-center">
+      <v-col cols="11" md="9">
+        <v-row class="d-flex justify-space-between">
+          <v-col cols="12" md="6" class="d-flex justify-start">
             <h3>
-              г. Пермь, ул. Пермская, 33<br>
-              +7 (958) 14 13 321<br>
+              г. Пермь, ул. Пермская, 33<br><br>
+              <a href="tel:+7 (958) 14 13 321" class="telegram-link">+7 (958) 14 13 321</a><br><br>
               <NuxtLink href="https://t.me/SayaLounge" class="telegram-link" target="_blank">Telegram: @SayaLounge
               </NuxtLink><br>
               <br>
@@ -26,11 +26,16 @@ function scrollToTop() {
             </h3>
           </v-col>
 
-          <v-col cols="12" md="6" class="d-flex justify-center align-center" style="margin: 20px;">
-            <v-btn class="btn-black-background" @click="scrollToTop">
+          <v-col cols="12" md="6" class="d-flex justify-md-end justify-center align-center">
+            <!-- <v-btn class="btn-black-background" @click="scrollToTop">
               Вернуться наверх
               <v-icon right>mdi-arrow-up-thin</v-icon>
-            </v-btn>
+            </v-btn> -->
+            <v-row class="d-flex justify-md-end justify-center">
+              <v-col cols="5" md="4" lg="3">
+                <v-img src="/icons/logo.png" contain></v-img>
+              </v-col>
+            </v-row>
           </v-col>
         </v-row>
       </v-col>
