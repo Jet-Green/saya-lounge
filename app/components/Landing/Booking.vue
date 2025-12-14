@@ -1,6 +1,7 @@
 <script setup lang="ts"></script>
 <template>
-  <v-row class="d-flex justify-center">
+  <v-row class="d-flex justify-center full-height-block">
+    <!-- big screen -->
     <v-col cols="11" md="9" class="d-none d-md-flex justify-center align-center">
       <v-row class="d-flex justify-space-between">
         <v-col cols="12" md="5" class="d-flex flex-column justify-center align-start">
@@ -34,7 +35,9 @@
         </v-col>
       </v-row>
     </v-col>
+    <!-- big screen -->
 
+    <!-- small screen! -->
     <v-col cols="12" class="d-flex d-md-none justify-center align-center my-8 img-background">
       <v-row class="d-flex justify-center">
         <v-col cols="11" md="5" class="d-flex flex-column justify-center align-start">
@@ -63,6 +66,7 @@
         </v-col>
       </v-row>
     </v-col>
+    <!-- small screen! -->
   </v-row>
 </template>
 <style scoped lang="scss">
