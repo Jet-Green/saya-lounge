@@ -16,8 +16,15 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 400, message: 'Invalid image file' })
   }
 
-  const ext = file.filename?.split('.').pop() || 'jpg'
-  const key = `gallery/${randomUUID()}.${ext}`
+  // Получаем folder из query параметров (по умолчанию 'gallery')
+  const { folder = 'gallery' } = getQuery(event)
+  const folderName = typeof folder === 'string' ? folder : 'gallery'
+
+  const filename = file.filename || 'file'
+  const ext = filename.split('.').pop() || 'jpg'
+  const basename = filename.substring(0, filename.lastIndexOf('.')) || 'file'
+  const uuid = randomUUID()
+  const key = `${folderName}/${basename}-${uuid}.${ext}`
 
 
   try {
