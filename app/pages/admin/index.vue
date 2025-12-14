@@ -19,6 +19,20 @@ const sections = [
     to: '/admin/upload-gallery',
     color: 'primary'
   },
+  {
+    title: 'Фотографии для меню',
+    description: 'Загрузить, удалить картинки со страницы меню',
+    icon: 'mdi-image-edit-outline',
+    to: '/admin/upload-menu',
+    color: 'primary'
+  },
+  {
+    title: 'Фотографии для бара',
+    description: 'Загрузить, удалить картинки со страницы бара',
+    icon: 'mdi-image-edit-outline',
+    to: '/admin/upload-bar',
+    color: 'primary'
+  },
 ]
 </script>
 

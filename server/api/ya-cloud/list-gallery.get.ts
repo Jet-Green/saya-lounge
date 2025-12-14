@@ -4,13 +4,14 @@ import { s3 } from '~~/server/utils/s3'
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig()
   const bucket = config.ycBucket
-  const { limit, continuationToken } = getQuery(event)
+  const { limit, continuationToken, folder = 'gallery' } = getQuery(event)
 
+  const folderName = typeof folder === 'string' ? folder : 'gallery'
   const maxKeys = Number(limit) && Number(limit) > 0 ? Number(limit) : 50
 
   const command = new ListObjectsV2Command({
     Bucket: bucket,
-    Prefix: 'gallery/',
+    Prefix: `${folderName}/`,
     MaxKeys: maxKeys,
     ContinuationToken: typeof continuationToken === 'string' ? continuationToken : undefined,
   })

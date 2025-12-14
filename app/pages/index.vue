@@ -196,16 +196,19 @@ function justifyClass(justify: string) {
         cover>
         <v-row class="d-flex justify-center align-start">
 
+          <!-- <v-col cols="12" md="6" class="d-flex justify-center align-center pa-4"
+            style="margin: clamp(3.125rem, -10.2083rem + 20.8333vw, 6.25rem) 0 !important;">
+            <v-btn class="transparent-bg" href="https://t.me/" target="_blank"> -->
           <v-col cols="12" md="6" class="d-flex justify-center align-center pa-4"
             style="margin: clamp(3.125rem, -10.2083rem + 20.8333vw, 6.25rem) 0 !important;">
-            <v-btn class="transparent-bg" href="https://t.me/" target="_blank">
+            <v-btn class="transparent-bg" to="/bar">
               БАР
             </v-btn>
           </v-col>
 
-          <v-col cols="12" md="6" class="d-flex justify-center align-center pa-4"
-            style="margin: clamp(3.125rem, -10.2083rem + 20.8333vw, 6.25rem) 0 !important;">
-            <v-btn class="transparent-bg" href="https://t.me/" target="_blank">
+          <v-col cols="12" md="6" class="d-flex justify-center align-center pa-4">
+            <v-btn class="transparent-bg" to="/menu"
+              style="margin: clamp(3.125rem, -10.2083rem + 20.8333vw, 6.25rem) 0 !important;">
               МЕНЮ
             </v-btn>
           </v-col>
