@@ -9,8 +9,10 @@ export const useAdminGallery = () => {
     loading: galleryLoading, 
     error: galleryError, 
     fetchItems: fetchGallery, 
-    deleteItem: deleteGalleryItem, 
-    deletingKey 
+    deleteItem: deleteGalleryItem,
+    moveItem: moveGalleryItem,
+    deletingKey,
+    movingKey
   } = useAdminPhotos('gallery')
 
   return {
@@ -24,6 +26,8 @@ export const useAdminGallery = () => {
     galleryError,
     fetchGallery,
     deleteGalleryItem,
+    moveGalleryItem,
     deletingKey,
+    movingKey,
   }
 }

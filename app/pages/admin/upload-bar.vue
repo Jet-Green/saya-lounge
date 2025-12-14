@@ -4,7 +4,7 @@ definePageMeta({
   middleware: "admin"
 })
 
-const { uploading, uploadedCount, totalFiles, successMessage, uploadFiles, barItems, barLoading, barError, fetchBar, deleteBarItem, deletingKey } = useAdminBar()
+const { uploading, uploadedCount, totalFiles, successMessage, uploadFiles, barItems, barLoading, barError, fetchBar, deleteBarItem, moveBarItem, deletingKey, movingKey } = useAdminBar()
 
 onMounted(fetchBar)
 
@@ -21,7 +21,7 @@ watch(
 <template>
   <AdminPhotoUpload
     title="Фотографии бара"
-    description="Формат названия файла: номер.описание.расширение. Примеры: 1.интерьер.jpg, 2.коктейль.png"
+    description=""
     :uploading="uploading"
     :uploaded-count="uploadedCount"
     :total-files="totalFiles"
@@ -30,8 +30,10 @@ watch(
     :loading="barLoading"
     :error="barError"
     :deleting-key="deletingKey"
+    :moving-key="movingKey"
     @upload="uploadFiles"
     @delete="deleteBarItem"
+    @move="moveBarItem"
   />
   
 </template>

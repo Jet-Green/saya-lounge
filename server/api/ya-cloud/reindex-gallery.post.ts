@@ -1,25 +1,11 @@
-import { DeleteObjectCommand, CopyObjectCommand } from '@aws-sdk/client-s3'
+import { CopyObjectCommand, DeleteObjectCommand } from '@aws-sdk/client-s3'
 import { s3 } from '~~/server/utils/s3'
 
 export default defineEventHandler(async (event) => {
-  const config = useRuntimeConfig()
-  const bucket = config.ycBucket
-  const { key, folder = 'gallery' } = await readBody(event)
-
-  if (!key || typeof key !== 'string') {
-    return { success: false, error: 'No key provided' }
-  }
+  const { folder = 'gallery' } = await readBody(event)
 
   try {
-    // Сначала удаляем файл
-    await s3.send(
-      new DeleteObjectCommand({
-        Bucket: bucket,
-        Key: key,
-      })
-    )
-
-    // Потом получаем список файлов в этой папке и переиндексируем
+    // Получаем список файлов в папке
     const res = await $fetch('/api/ya-cloud/list-gallery', {
       method: 'GET',
       params: { limit: 10000, folder },
@@ -33,7 +19,10 @@ export default defineEventHandler(async (event) => {
         return numA - numB
       })
 
-    // Переиндексируем оставшиеся файлы с номерами 1, 2, 3...
+    const config = useRuntimeConfig()
+    const bucket = config.ycBucket
+
+    // Переиндексируем все файлы с номерами 1, 2, 3...
     let newNumber = 1
     for (const item of items) {
       const fileName = item.key.split('/').pop() || ''
@@ -69,9 +58,7 @@ export default defineEventHandler(async (event) => {
 
     return { success: true }
   } catch (error) {
-    const errMsg = (error && typeof error === 'object' && 'message' in error) ? (error as Error).message : 'Delete failed'
+    const errMsg = (error && typeof error === 'object' && 'message' in error) ? (error as Error).message : 'Reindex failed'
     return { success: false, error: errMsg }
   }
 })
-
-
