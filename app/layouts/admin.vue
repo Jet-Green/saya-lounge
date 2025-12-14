@@ -16,7 +16,9 @@ const breadcrumbTranslations: { [key: string]: string } = {
   "admin": "Админка",
   "employers": "Работодатели",
   "job-reservations": "История бронирования",
-  "upload-gallery": "Галерея"
+  "upload-gallery": "Галерея",
+  "upload-menu": "Меню",
+  "upload-bar": "Бар",
 };
 
 const navigationItems: any[] = [

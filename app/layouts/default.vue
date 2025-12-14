@@ -12,7 +12,7 @@ const isAdmin = computed(() => route.path.startsWith('/admin'))
             <NuxtLink to="/">
               О нас
             </NuxtLink>
-            <NuxtLink to="/">
+            <NuxtLink to="/menu">
               Меню
             </NuxtLink>
             <NuxtLink to="/">

@@ -200,13 +200,13 @@ function justifyClass(justify: string) {
         <v-row class="d-flex justify-center align-start">
 
           <v-col cols="12" md="6" class="d-flex justify-center align-center pa-4">
-            <v-btn class="transparent-bg" href="https://t.me/" target="_blank">
+            <v-btn class="transparent-bg" href="/bar">
               БАР
             </v-btn>
           </v-col>
 
           <v-col cols="12" md="6" class="d-flex justify-center align-center pa-4">
-            <v-btn class="transparent-bg" href="https://t.me/" target="_blank">
+            <v-btn class="transparent-bg" href="/menu">
               МЕНЮ
             </v-btn>
           </v-col>
