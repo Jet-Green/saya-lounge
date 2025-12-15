@@ -7,11 +7,11 @@ function scrollToTop() {
 </script>
 
 <template>
-  <v-footer padless class="pa-0">
+  <v-footer padless class="pa-0" theme="dark">
     <v-row class="d-flex justify-center">
       <v-col cols="11" md="9">
         <v-row class="d-flex justify-space-between">
-          <v-col cols="12" md="6" class="d-flex justify-start">
+          <v-col cols="12" md="6" class="d-flex justify-start" style="margin: 5% 0 !important;">
             <h3>
               г. Пермь, ул. Пермская, 33<br><br>
               <a href="tel:+7 (958) 14 13 321" class="telegram-link">+7 (958) 14 13 321</a><br><br>
