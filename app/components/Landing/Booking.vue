@@ -60,7 +60,7 @@ let router = useRouter()
             </h2>
 
             <v-col class="pt-8">
-              <v-btn class="transparent-bg">
+              <v-btn class="transparent-bg" @click="router.push('/master-room')">
                 Провести свое мероприятие
               </v-btn>
             </v-col>
