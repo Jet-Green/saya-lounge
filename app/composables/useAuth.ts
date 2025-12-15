@@ -8,6 +8,8 @@ export function useAuth() {
 
   async function registration(data: any): Promise<boolean> {
     try {
+      console.log(data);
+
       const response = await AuthAPI.registration(data)
 
       if (response.user) {
