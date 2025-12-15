@@ -32,7 +32,7 @@ theme.change("light")
 <template>
   <v-row class="d-flex justify-center">
     <v-col cols="12">
-      <v-parallax src="/images/bones.png" max-height="500px" scale="0.7" class="d-flex justify-center align-center">
+      <v-parallax src="/images/bones.webp" max-height="500px" scale="0.9" class="d-flex justify-center align-center">
         <v-img src="/icons/logo.png" style="height: clamp(12.5rem, 2.5568rem + 28.4091vw, 25rem)"></v-img>
       </v-parallax>
     </v-col>
