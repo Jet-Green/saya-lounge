@@ -26,8 +26,9 @@ const {
   <v-progress-linear v-if="loading" indeterminate color="primary" class="mb-8" />
 
   <v-row v-if="items.length > 0" dense justify="center">
-    <v-col v-for="item in items" :key="item.key" cols="12" sm="6" md="4" class="pa-3">
-      <v-img :src="item.url" :alt="item.key" aspect-ratio="1" class="photo-img" cover draggable="false" lazy @click="handleImageClick(item.url)" />
+    <v-col v-for="item in items" :key="item.key" cols="12" md="6" class="pa-3">
+      <v-img :src="item.url" :alt="item.key" class="photo-img" cover draggable="false" lazy
+        @click="handleImageClick(item.url)" />
     </v-col>
   </v-row>
 
@@ -38,8 +39,7 @@ const {
   </v-row>
 
   <v-overlay :model-value="isOverlayActive" class="gallery-overlay" :scrim="true" :opacity="0.85" @click="closeImage">
-    <div ref="overlayContentRef" class="gallery-overlay-content" tabindex="0" @click.stop
-      @keydown="overlayKeyHandler">
+    <div ref="overlayContentRef" class="gallery-overlay-content" tabindex="0" @click.stop @keydown="overlayKeyHandler">
       <v-btn icon variant="text" class="gallery-overlay-close" @click.stop="closeImage">
         <v-icon icon="mdi-close" size="36"></v-icon>
       </v-btn>
