@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { useTheme } from 'vuetify';
+
+const theme = useTheme()
 
 const images = [
   // 1–3: ровный старт
@@ -24,6 +27,7 @@ const images = [
   { src: 'images/master-room/12.jpg', cols: 12, md: 6, lg: 6 },
 ]
 
+theme.change("light")
 </script>
 <template>
   <v-row class="d-flex justify-center">
@@ -41,7 +45,7 @@ const images = [
         торжество — безупречным событием.</h3>
     </v-col>
 
-    <v-col cols="12">
+    <v-col cols="12" class="mb-8">
       <v-row>
         <v-col v-for="(img, index) of images" :key="index" :cols="img.cols" :md="img.md" :lg="img.lg">
           <v-img cover :src="img.src" class="h-100"></v-img>
