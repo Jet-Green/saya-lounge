@@ -62,6 +62,8 @@ const submit = handleSubmit(async values => {
       ...values,
       roles: [],
     });
+    console.log(res);
+
 
     if (res) {
       await router.push(`/admin`);
