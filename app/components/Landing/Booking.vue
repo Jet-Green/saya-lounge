@@ -1,4 +1,6 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+let router = useRouter()
+</script>
 <template>
   <v-row class="d-flex justify-center full-height-block">
     <!-- big screen -->
@@ -22,7 +24,7 @@
             </h2>
 
             <v-col class="pt-8">
-              <v-btn>
+              <v-btn @click="router.push('/master-room')">
                 Провести свое мероприятие
               </v-btn>
             </v-col>

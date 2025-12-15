@@ -32,6 +32,16 @@ export default defineNuxtPlugin((nuxtApp) => {
             info: '#FFFFFF',
           }
         },
+        light: {
+          dark: true,
+          colors: {
+            background: '#FFFFFF',
+            surface: '#FFFFFF',
+            primary: '#000000',
+            secondary: '#000000',
+            info: '#000000',
+          }
+        }
       },
     },
     defaults: {
