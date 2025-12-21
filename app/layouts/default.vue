@@ -7,15 +7,14 @@ const isAdmin = computed(() => route.path.startsWith('/admin'))
 
 let routes = computed(() => {
   if (route.path == "/")
-    return [{ name: "О нас", link: "/#about-us" }, { name: "Меню", link: "/#menu-bar" }, { name: "Контакты", link: "/#contacts" }]
-  return [{ name: "О нас", link: "/#about-us" }, { name: "Главная", link: "/" }, { name: "Контакты", link: "/#contacts" }]
+    return [{ name: "Галерея", link: "/gallery" }, { name: "Меню", link: "/#menu-bar" }, { name: "Контакты", link: "/#contacts" }]
+  return [{ name: "Галерея", link: "/gallery" }, { name: "Главная", link: "/" }, { name: "Контакты", link: "/#contacts" }]
 })
 
 
 watch(route, () => {
-  if (route.path == '/')
-    theme.change('dark')
-  if (route.path == "/master-room")
+  theme.change('dark')
+  if (route.path == "/master-room" || route.path == "/gallery")
     theme.change('light')
 })
 </script>
