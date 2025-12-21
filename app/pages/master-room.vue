@@ -46,10 +46,13 @@ theme.change("light")
     </v-col>
 
     <v-col cols="12" class="mb-8">
-      <v-row>
-        <v-col v-for="(img, index) of images" :key="index" :cols="img.cols" :md="img.md" :lg="img.lg">
-          <v-img cover :src="img.src" class="h-100"></v-img>
+      <v-row class="d-flex justify-center">
+        <v-col cols="12" sm="11" md="10">
+          <v-img src="/images/master-room/main.jpg" cover></v-img>
         </v-col>
+        <!-- <v-col v-for="(img, index) of images" :key="index" :cols="img.cols" :md="img.md" :lg="img.lg">
+          <v-img cover :src="img.src" class="h-100"></v-img>
+        </v-col> -->
       </v-row>
     </v-col>
   </v-row>
