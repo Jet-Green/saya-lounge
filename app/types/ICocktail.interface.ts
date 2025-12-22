@@ -1,5 +1,7 @@
 export interface ICocktail {
   _id: number
+  images: string[]
+  ingredients: string
   category: string
   name: string
   price: number | string // число для простых цен, строка для вилок («860 / 640»)

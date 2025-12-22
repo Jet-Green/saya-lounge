@@ -1,4 +1,7 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+let { dialog } = useAiDialog()
+
+</script>
 <template>
   <v-col cols="12" class="image-bg" style="margin: 50px 0 !important;">
     <v-row class="d-flex justify-center">
@@ -33,7 +36,7 @@
               </h1>
 
               <v-col cols="12" md="10" style="margin: 40px 0 !important;" class="d-flex align-center">
-                <v-btn class="transparent-bg" href="https://t.me/" target="_blank">
+                <v-btn class="transparent-bg" @click="dialog = true">
                   Подобрать напиток
                 </v-btn>
               </v-col>
@@ -48,6 +51,7 @@
     </v-row>
   </v-col>
 
+  <AiDialog />
 </template>
 <style scoped lang="scss">
 .image-bg {
