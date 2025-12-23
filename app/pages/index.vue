@@ -1,14 +1,11 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useDisplay } from 'vuetify'
 import { useGallery } from '@/composables/useGallery'
 import { useGalleryPagination } from '@/composables/useGalleryPagination'
-import { useSwipe } from '@/composables/useSwipe'
-import { useAutoScroll } from '@/composables/useAutoScroll'
 import { useImageOverlay } from '@/composables/useImageOverlay'
 
-
-const props = defineProps<{ rowsPerPage?: number }>()
-const rowsPerPage = props.rowsPerPage ?? 2
+const display = useDisplay()
 
 const { images, loading, error, fetchGallery } = useGallery()
 
@@ -17,8 +14,14 @@ onMounted(() => {
   fetchGallery()
 })
 
+// Адаптивное количество фоток на странице
+const imagesPerPage = computed(() => {
+  if (display.xs.value) return 1
+  if (display.sm.value) return 2
+  return 3
+})
+
 const {
-  pages,
   currentPage,
   currentPageIdx,
   transitionName,
@@ -26,22 +29,7 @@ const {
   hasMultiplePages,
   nextPage,
   prevPage,
-} = useGalleryPagination(images, rowsPerPage)
-
-const swipe = useSwipe({
-  onNext: () => nextPage(),
-  onPrev: () => prevPage(),
-})
-
-// экспортируем обработчики тача, используемые в шаблоне
-const {
-  handleTouchStart,
-  handleTouchMove,
-  handleTouchEnd,
-  handleTouchCancel,
-} = swipe
-
-useAutoScroll(hasMultiplePages as any, nextPage, { intervalMs: 20000 })
+} = useGalleryPagination(images, imagesPerPage)
 
 const overlay = useImageOverlay()
 
@@ -54,22 +42,6 @@ const {
   closeImage,
   overlayKeyHandler,
 } = overlay
-
-const pagesCount = computed(() => pages.value.length)
-const currentPageIndex = computed(() => currentPageIdx.value)
-const currentPageKey = computed(() => `page-${currentPageIndex.value}`)
-
-// преобразует значение justify в css-класс (шаблон использует класс или prop)
-function justifyClass(justify: string) {
-  switch (justify) {
-    case 'start': return 'justify-start'
-    case 'center': return 'justify-center'
-    case 'end': return 'justify-end'
-    case 'space-between': return 'justify-space-between'
-    case 'space-around': return 'justify-space-around'
-    default: return 'justify-center'
-  }
-}
 </script>
 
 <template>
@@ -144,29 +116,39 @@ function justifyClass(justify: string) {
     </v-col>
 
     <!-- Карусель фоток -->
-    <v-col cols="12" class="py-8">
-      <div class="gallery-wrapper">
-        <div v-if="hasPages" class="gallery-pages">
+    <v-col cols="12" class="py-8 gallery-container">
+      <v-row v-if="hasPages" class="gallery-wrapper" align="center" no-gutters>
+        <v-col cols="auto" class="pa-2" v-if="hasMultiplePages">
+          <v-btn icon variant="text" class="gallery-nav" @click="prevPage">
+            <v-icon icon="mdi-chevron-left" size="32"></v-icon>
+          </v-btn>
+        </v-col>
+
+        <v-col cols class="gallery-pages pa-0">
           <transition :name="transitionName" mode="out-in">
-            <div :key="currentPageIdx" class="gallery-page" @touchstart.passive="handleTouchStart"
-              @touchmove.passive="handleTouchMove" @touchend="handleTouchEnd" @touchcancel="handleTouchCancel">
-              <div v-for="(row, rowIdx) in currentPage" :key="`row-${currentPageIdx}-${row.key}`"
-                class="gallery-row-container">
-                <v-row class="gallery-row" dense :justify="row.justify" align="stretch">
-                  <v-col v-for="cell in row.cells" :key="cell.key" :cols="cell.cols" class="pa-0">
-                    <v-img :src="cell.src" class="gallery-img user-select-none" cover :draggable="false" loading="lazy"
-                      @click="handleImageClick(cell.src)"></v-img>
-                  </v-col>
-                </v-row>
-              </div>
+            <div :key="currentPageIdx" class="gallery-page">
+              <v-row class="gallery-row" justify="center">
+                <v-col v-for="image in currentPage" :key="image.key" cols="12" sm="6" md="4" class="pa-2">
+                  <v-img :src="image.src" class="gallery-img user-select-none" cover :draggable="false" loading="lazy"
+                    @click="handleImageClick(image.src)"></v-img>
+                </v-col>
+              </v-row>
             </div>
           </transition>
-        </div>
+        </v-col>
 
-        <div v-else class="gallery-empty">
+        <v-col cols="auto" class="pa-2" v-if="hasMultiplePages">
+          <v-btn icon variant="text" class="gallery-nav" @click="nextPage">
+            <v-icon icon="mdi-chevron-right" size="32"></v-icon>
+          </v-btn>
+        </v-col>
+      </v-row>
+
+      <v-row v-else class="gallery-empty">
+        <v-col cols="12" class="text-center">
           Галерея будет доступна позже
-        </div>
-      </div>
+        </v-col>
+      </v-row>
     </v-col>
 
     <v-overlay :model-value="isOverlayActive" class="gallery-overlay" :scrim="true" :opacity="0.85" @click="closeImage">
@@ -282,21 +264,30 @@ function justifyClass(justify: string) {
   font-weight: 700 !important
 }
 
-.gallery-row {
-  margin: 0;
-  --v-row-gap: 0px;
-  --v-col-gap: 0px;
+.gallery-container {
+  padding: 0 clamp(4px, 1vw, 16px) !important;
 }
 
 .gallery-wrapper {
-  position: relative;
-  padding: 0 64px;
-  --gallery-card-height: clamp(170px, 18vw, 280px);
+  padding: 0;
+  gap: 12px;
+}
+
+.gallery-pages {
+  overflow: hidden;
+}
+
+.gallery-page {
+  width: 100%;
+}
+
+.gallery-row {
+  margin: 0;
 }
 
 .gallery-img {
-  height: var(--gallery-card-height, clamp(200px, 22vw, 320px));
-  border-radius: 4px;
+  height: clamp(350px, 45vw, 500px);
+  border-radius: 8px;
   overflow: hidden;
   cursor: pointer;
   user-select: none;
@@ -306,34 +297,22 @@ function justifyClass(justify: string) {
   object-fit: cover;
 }
 
-@media (max-width: 960px) {
-  .gallery-wrapper {
-    padding: 0 48px;
-    --gallery-card-height: clamp(170px, 28vw, 280px);
-  }
+.gallery-nav {
+  min-width: auto !important;
+  min-height: auto !important;
+  width: 48px !important;
+  height: 48px !important;
+  padding: 0 !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(4px);
 }
 
-@media (max-width: 600px) {
-  .gallery-wrapper {
-    padding: 0 24px;
-    --gallery-card-height: clamp(120px, 38vw, 180px);
-  }
-}
-
-.gallery-pages {
-  position: relative;
-  overflow: hidden;
-  min-height: calc(var(--gallery-card-height, clamp(200px, 22vw, 320px)) * 2 + 32px);
-}
-
-.gallery-page {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-.gallery-row-container+.gallery-row-container {
-  margin-top: 0;
+.gallery-nav:hover {
+  background-color: rgba(255, 255, 255, 0.2) !important;
 }
 
 .gallery-empty {
