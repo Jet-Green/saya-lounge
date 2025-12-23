@@ -342,52 +342,6 @@ function justifyClass(justify: string) {
   color: #cacaca;
 }
 
-.gallery-overlay {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.gallery-overlay :deep(.v-overlay__content) {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-}
-
-.gallery-overlay-content {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: min(90vw, 960px);
-  max-height: 90vh;
-  outline: none;
-}
-
-.gallery-overlay-close {
-  position: fixed !important;
-  top: clamp(12px, 4vw, 24px);
-  right: clamp(12px, 4vw, 24px);
-  color: #fff !important;
-  background-color: rgba(0, 0, 0, 0.45) !important;
-  width: 48px !important;
-  height: 48px !important;
-  min-width: 48px !important;
-  min-height: 48px !important;
-  border-radius: 999px !important;
-  z-index: 11;
-}
-
-.gallery-overlay-img {
-  max-width: min(90vw, 960px);
-  max-height: 90vh;
-  width: 100%;
-  border-radius: 32px;
-  cursor: pointer;
-}
-
 .gallery-slide-left-enter-active,
 .gallery-slide-left-leave-active,
 .gallery-slide-right-enter-active,

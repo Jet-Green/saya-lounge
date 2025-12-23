@@ -13,9 +13,10 @@ let routes = computed(() => {
 
 
 watch(route, () => {
-  theme.change('dark')
   if (route.path == "/master-room" || route.path == "/gallery")
     theme.change('light')
+  else
+    theme.change('dark')
 })
 </script>
 
