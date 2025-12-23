@@ -1,4 +1,16 @@
 <script setup lang="ts">
+import { useDisplay } from 'vuetify'
+
+let display = useDisplay()
+let direction = ref<"horizontal" | "vertical">("horizontal")
+
+watch(display.mdAndDown, (isMdAndDown) => {
+  if (isMdAndDown) {
+    direction.value = "vertical"
+  } else {
+    direction.value = "horizontal"
+  }
+})
 
 let {
   strengthOptions, tasteOptions, moodOptions,
@@ -84,27 +96,29 @@ function submitPrompt() {
       <!-- Select Step -->
       <v-row v-if="step === 'select'" class="background-img d-flex justify-center">
         <v-col cols="12" class="pa-8">
-
           <!-- Вопрос 1: Крепость -->
           <h2 class="mb-3">Какую крепость вы предпочитаете?</h2>
-          <v-chip-group v-model="answers.strength" class="mb-6" selected-class="selected-chip">
-            <v-chip v-for="(s, i) in strengthOptions" :key="i" :value="i" size="x-large" variant="outlined">
+          <v-chip-group v-model="answers.strength" :direction="direction" class="mb-6" selected-class="selected-chip">
+            <v-chip v-for="(s, i) in strengthOptions" :key="i" :value="i" style="width: fit-content !important;"
+              size="x-large" variant="outlined">
               {{ s }}
             </v-chip>
           </v-chip-group>
 
           <!-- Вопрос 2: Вкус -->
           <h2 class="mb-3">Какой профиль вкуса вам ближе?</h2>
-          <v-chip-group v-model="answers.taste" class="mb-6" selected-class="selected-chip">
-            <v-chip v-for="(t, i) in tasteOptions" :key="i" :value="i" size="x-large" variant="outlined">
+          <v-chip-group v-model="answers.taste" :direction="direction" class="mb-6" selected-class="selected-chip">
+            <v-chip v-for="(t, i) in tasteOptions" :key="i" style="width: fit-content !important;" :value="i"
+              size="x-large" variant="outlined">
               {{ t }}
             </v-chip>
           </v-chip-group>
 
           <!-- Вопрос 3: Настроение -->
           <h2 class="mb-3">Какое настроение вы хотите передать напитком?</h2>
-          <v-chip-group v-model="answers.mood" class="mb-6" selected-class="selected-chip">
-            <v-chip v-for="(m, i) in moodOptions" :key="i" :value="i" size="x-large" variant="outlined">
+          <v-chip-group v-model="answers.mood" :direction="direction" class="mb-6" selected-class="selected-chip">
+            <v-chip v-for="(m, i) in moodOptions" :key="i" style="width: fit-content !important;" :value="i"
+              size="x-large" variant="outlined">
               {{ m }}
             </v-chip>
           </v-chip-group>
@@ -112,7 +126,7 @@ function submitPrompt() {
         </v-col>
 
         <!-- Кнопка отправки -->
-        <v-col cols="12" md="6" lg="4">
+        <v-col cols="12" md="6" lg="4" class="pa-8">
           <v-btn class="step-button"
             :disabled="answers.strength === null || answers.taste === null || answers.mood === null"
             @click="submitPrompt">
