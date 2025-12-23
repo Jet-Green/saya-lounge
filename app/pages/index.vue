@@ -286,7 +286,7 @@ const {
 }
 
 .gallery-img {
-  height: clamp(350px, 45vw, 500px);
+  height: clamp(500px, 45vw, 800px);
   border-radius: 8px;
   overflow: hidden;
   cursor: pointer;
