@@ -23,6 +23,8 @@ export default defineNuxtConfig({
         config.plugins.push(vuetify({ autoImport: true }))
       })
     },
+    "@nuxtjs/seo",
+    "@nuxtjs/sitemap"
   ],
   routeRules: {
     '/admin/**': { ssr: false },
@@ -34,7 +36,7 @@ export default defineNuxtConfig({
         {
           name: 'description', content: `Лаундж-бар САЯ — новое концептуальное заведение от бренд-шефа Александра Ежова. Это пространство, где время замедляет свой бег, чтобы вы смогли обрести внутренне равновесие и перезагрузить чувства.`
         },
-        { name: 'keywords', content: 'пермь,сая,коктейли,коктейль-бра,гедонист,ежов' },
+        { name: 'keywords', content: 'пермь,сая,коктейли,коктейль-бра,гедонист,ежов,ресторан александра ежова' },
 
         // Open Graph (для соцсетей)
         { property: 'og:title', content: 'Сая Лаундж' },
@@ -44,4 +46,12 @@ export default defineNuxtConfig({
       ],
     },
   },
+  site: {
+    url: 'https://sayalounge.ru',
+    name: 'Сая Лаундж'
+  },
+  sitemap: {
+    // fetch URLs from an API endpoint
+    sources: ['/api/__sitemap__/urls']
+  }
 })
