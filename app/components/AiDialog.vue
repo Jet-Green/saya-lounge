@@ -32,6 +32,14 @@ const answers = ref<{
 function submitPrompt() {
   askAi(answers.value.strength, answers.value.taste, answers.value.mood)
 }
+
+onMounted(() => {
+  if (display.mdAndDown.value) {
+    direction.value = "vertical"
+  } else {
+    direction.value = "horizontal"
+  }
+})
 </script>
 
 <template>
