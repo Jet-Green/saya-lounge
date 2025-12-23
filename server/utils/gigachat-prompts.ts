@@ -2,16 +2,7 @@ import { sayaCocktails } from "./cocktails"
 
 export function generateSystemPrompt(): string {
   const menuLines = sayaCocktails.map(cocktail => {
-    let strengthLabel: string
-    if (cocktail.alcohol === 0) {
-      strengthLabel = 'безалкогольный'
-    } else if (typeof cocktail.alcohol === 'number') {
-      strengthLabel = `${cocktail.alcohol}%`
-    } else {
-      strengthLabel = cocktail.strength || 'средней крепости'
-    }
-
-    return `${cocktail._id} | ${cocktail.category} | ${cocktail.volume} | ${strengthLabel} | ${cocktail.description}`
+    return `${cocktail._id} | ${cocktail.name} | ${cocktail.ingredients} | ${cocktail.description}`
   }).join('\n')
 
   return `Ты — бармен в премиум-баре. У тебя есть меню из ${sayaCocktails.length} напитков. Каждый напиток имеет уникальный числовой идентификатор _id (от 1 до ${sayaCocktails.length}), категорию, описание вкуса, крепость и объём.
@@ -46,7 +37,7 @@ export function generateSystemPrompt(): string {
 - Никаких слов, пояснений, кавычек, списков или форматирования.
 - Если ни один напиток не подходит — ответь: 0
 
-Вот меню (каждая строка: _id | category | volume | strength | description):
+Вот меню (каждая строка: _id | name крепость и вкус | ingredients | description):
 
 ${menuLines}
 
