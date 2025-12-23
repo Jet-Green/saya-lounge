@@ -43,7 +43,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <v-dialog v-model="dialog" width="80vw" min-height="80vh" persistent eager>
+  <v-dialog v-model="dialog" width="95vw" min-height="80vh" persistent eager>
     <v-card style="position: relative;">
       <!-- Close button -->
       <div style="position: absolute; top: 12px; right: 12px; cursor: pointer; z-index: 1000;" @click="closeDialog">
