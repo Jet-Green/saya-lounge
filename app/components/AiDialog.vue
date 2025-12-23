@@ -31,7 +31,8 @@ function submitPrompt() {
       </div>
 
       <!-- Preview Step -->
-      <v-row v-if="step === 'preview'">
+      <!-- Макет для md и выше -->
+      <v-row v-if="step === 'preview'" class="d-none d-md-flex">
         <v-col cols="6" class="d-flex justify-center align-center">
           <v-row class="d-flex justify-center h-100">
             <v-col cols="8" lg="6" class="d-flex flex-column justify-space-around">
@@ -46,15 +47,42 @@ function submitPrompt() {
         </v-col>
         <v-col cols="6" style="overflow: hidden; height: 80vh;">
           <ClientOnly>
-            <video autoplay loop muted playsinline class="hero-video">
+            <video autoplay loop muted playsinline class="hero-video w-100 h-100" style="object-fit: cover;">
               <source src="https://storage.yandexcloud.net/saya-lounge/videos/ai.mp4" type="video/mp4" />
             </video>
           </ClientOnly>
         </v-col>
       </v-row>
 
+      <!-- Фон с видео и затемнением для sm и xs -->
+      <div v-if="step === 'preview'" class="d-md-none position-relative w-100"
+        style="height: 100dvh; overflow: hidden;">
+        <ClientOnly>
+          <video autoplay loop muted playsinline class="w-100 h-100"
+            style="object-fit: cover; position: absolute; top: 0; left: 0; z-index: 0;">
+            <source src="https://storage.yandexcloud.net/saya-lounge/videos/ai.mp4" type="video/mp4" />
+          </video>
+        </ClientOnly>
+
+        <!-- Затемнение -->
+        <div class="position-absolute top-0 left-0 w-100 h-100" style="background: rgba(0, 0, 0, 0.5); z-index: 1;">
+        </div>
+
+        <!-- Контент поверх видео -->
+        <div class="position-absolute top-0 left-0 w-100 h-100 d-flex flex-column justify-space-around align-center"
+          style="z-index: 2; padding: 16px; text-align: center;">
+          <h2 class="text-white px-4">Добро пожаловать в мир вкусов, ароматов и экспериментов — здесь каждый коктейль
+            рассказывает историю</h2>
+          <h3 class="text-white px-4">Просто скажи, что чувствуешь — и я подберу напиток, который идеально подойдёт
+            твоему настроению.</h3>
+          <v-btn class="step-button" @click="nextStep('select')">
+            <h2 class="my-5">К подбору коктейля</h2>
+          </v-btn>
+        </div>
+      </div>
+
       <!-- Select Step -->
-      <v-row v-else-if="step === 'select'" class="background-img d-flex justify-center">
+      <v-row v-if="step === 'select'" class="background-img d-flex justify-center">
         <v-col cols="12" class="pa-8">
 
           <!-- Вопрос 1: Крепость -->
@@ -94,7 +122,7 @@ function submitPrompt() {
       </v-row>
 
       <!-- Result Step -->
-      <v-row v-else-if="step === 'result'">
+      <v-row v-if="step === 'result'">
         <v-col v-for="cocktail of resultCocktails" class="pa-2" :key="cocktail._id" cols="12" md="6" lg="4">
           <AiCocktail :cocktail="cocktail" />
         </v-col>
