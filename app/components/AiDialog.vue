@@ -107,7 +107,8 @@ onMounted(() => {
           <!-- Вопрос 1: Крепость -->
           <h2 class="mb-3">Какую крепость вы предпочитаете?</h2>
           <v-chip-group v-model="answers.strength" :direction="direction" class="mb-6" selected-class="selected-chip">
-            <v-chip v-for="(s, i) in strengthOptions" :key="i" :value="i" style="width: fit-content !important;"
+            <v-chip v-for="(s, i) in strengthOptions" :key="i" :value="i"
+              style="width: fit-content !important; font-size: clamp(0.8125rem, 0.6136rem + 0.5682vw, 1.0625rem) !important;"
               size="x-large" variant="outlined">
               {{ s }}
             </v-chip>
@@ -116,8 +117,9 @@ onMounted(() => {
           <!-- Вопрос 2: Вкус -->
           <h2 class="mb-3">Какой профиль вкуса вам ближе?</h2>
           <v-chip-group v-model="answers.taste" :direction="direction" class="mb-6" selected-class="selected-chip">
-            <v-chip v-for="(t, i) in tasteOptions" :key="i" style="width: fit-content !important;" :value="i"
-              size="x-large" variant="outlined">
+            <v-chip v-for="(t, i) in tasteOptions" :key="i"
+              style="width: fit-content !important; font-size: clamp(0.8125rem, 0.6136rem + 0.5682vw, 1.0625rem) !important;"
+              :value="i" size="x-large" variant="outlined">
               {{ t }}
             </v-chip>
           </v-chip-group>
@@ -125,8 +127,9 @@ onMounted(() => {
           <!-- Вопрос 3: Настроение -->
           <h2 class="mb-3">Какое настроение вы хотите передать напитком?</h2>
           <v-chip-group v-model="answers.mood" :direction="direction" class="mb-6" selected-class="selected-chip">
-            <v-chip v-for="(m, i) in moodOptions" :key="i" style="width: fit-content !important;" :value="i"
-              size="x-large" variant="outlined">
+            <v-chip v-for="(m, i) in moodOptions" :key="i"
+              style="width: fit-content !important; height: fit-content; padding: 14px; font-size: clamp(0.8125rem, 0.6136rem + 0.5682vw, 1.0625rem) !important;"
+              :value="i" size="x-large" variant="outlined">
               {{ m }}
             </v-chip>
           </v-chip-group>
