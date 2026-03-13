@@ -3,29 +3,19 @@ import { useTheme } from 'vuetify';
 
 const theme = useTheme()
 
-const images = [
-  // 1–3: ровный старт
-  { src: 'images/master-room/1.jpg', cols: 12, md: 4, lg: 4 },
-  { src: 'images/master-room/2.jpg', cols: 12, md: 4, lg: 4 },
-  { src: 'images/master-room/3.jpg', cols: 12, md: 4, lg: 4 },
-
-  // 4–5: стандарт 6/6
-  { src: 'images/master-room/4.jpg', cols: 12, md: 6, lg: 6 },
-  { src: 'images/master-room/5.jpg', cols: 12, md: 6, lg: 6 },
-
-  // 6–8: снова плотная тройка
-  { src: 'images/master-room/6.jpg', cols: 12, md: 4, lg: 4 },
-  { src: 'images/master-room/7.jpg', cols: 12, md: 4, lg: 4 },
-  { src: 'images/master-room/8.jpg', cols: 12, md: 4, lg: 4 },
-
-  // 9–10: редкий акцент
-  { src: 'images/master-room/9.jpg', cols: 12, md: 8, lg: 8 },
-  { src: 'images/master-room/10.jpg', cols: 12, md: 4, lg: 4 },
-
-  // 11–12: финал 6/6
-  { src: 'images/master-room/11.jpg', cols: 12, md: 6, lg: 6 },
-  { src: 'images/master-room/12.jpg', cols: 12, md: 6, lg: 6 },
+const items = [
+  { key: '5', url: 'https://storage.yandexcloud.net/saya-lounge/master-room/5.jpg' },
+  { key: '10', url: 'https://storage.yandexcloud.net/saya-lounge/master-room/10.jpg' },
+  { key: '14', url: 'https://storage.yandexcloud.net/saya-lounge/master-room/14.jpg' },
+  { key: '19', url: 'https://storage.yandexcloud.net/saya-lounge/master-room/19.jpg' },
+  { key: '50', url: 'https://storage.yandexcloud.net/saya-lounge/master-room/50.jpg' },
+  { key: '51', url: 'https://storage.yandexcloud.net/saya-lounge/master-room/51.jpg' },
+  { key: '39', url: 'https://storage.yandexcloud.net/saya-lounge/master-room/39.jpg' },
+  { key: '40', url: 'https://storage.yandexcloud.net/saya-lounge/master-room/40.jpg' },
 ]
+
+const loading = ref(false)
+const error = ref('')
 
 theme.change("light")
 </script>
@@ -47,14 +37,7 @@ theme.change("light")
     </v-col>
 
     <v-col cols="12" class="mb-8">
-      <v-row class="d-flex justify-center">
-        <v-col cols="12" sm="11" md="10">
-          <v-img src="/images/master-room/main.jpg" cover></v-img>
-        </v-col>
-        <!-- <v-col v-for="(img, index) of images" :key="index" :cols="img.cols" :md="img.md" :lg="img.lg">
-          <v-img cover :src="img.src" class="h-100"></v-img>
-        </v-col> -->
-      </v-row>
+      <PhotoGallery :items="items" :loading="loading" :error="error" />
     </v-col>
   </v-row>
 </template>

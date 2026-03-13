@@ -25,10 +25,35 @@ const {
   <v-alert v-if="error" type="error" class="mb-8">{{ error }}</v-alert>
   <v-progress-linear v-if="loading" indeterminate color="primary" class="mb-8" />
 
-  <v-row v-if="items.length > 0" dense justify="center">
-    <v-col v-for="item in items" :key="item.key" cols="12" md="6" class="pa-3">
-      <v-img :src="item.url" :alt="item.key" class="photo-img" cover draggable="false" lazy
-        @click="handleImageClick(item.url)" />
+  <v-row class="d-flex justify-center" v-if="items.length > 0">
+    <v-col cols="11" sm="11" md="10">
+      <v-row class="d-none d-lg-flex">
+        <v-col cols="4">
+          <v-img v-for="(item, index) in items.filter((_, i) => i % 3 === 0)" :key="item.key" :src="item.url"
+            :alt="item.key" class="my-2" cover draggable="false" lazy @click="handleImageClick(item.url)" />
+        </v-col>
+
+        <v-col cols="4" class="px-2">
+          <v-img v-for="(item, index) in items.filter((_, i) => i % 3 === 1)" :key="item.key" :src="item.url"
+            :alt="item.key" class="my-2" cover draggable="false" lazy @click="handleImageClick(item.url)" />
+        </v-col>
+
+        <v-col cols="4">
+          <v-img v-for="(item, index) in items.filter((_, i) => i % 3 === 2)" :key="item.key" :src="item.url"
+            :alt="item.key" class="my-2" cover draggable="false" lazy @click="handleImageClick(item.url)" />
+        </v-col>
+      </v-row>
+      <v-row class="d-flex d-lg-none">
+        <v-col cols="6" class="pr-2">
+          <v-img v-for="(item, index) in items.filter((_, i) => i % 2 === 0)" :key="item.key" :src="item.url"
+            :alt="item.key" class="my-2" cover draggable="false" lazy @click="handleImageClick(item.url)" />
+        </v-col>
+
+        <v-col cols="6">
+          <v-img v-for="(item, index) in items.filter((_, i) => i % 2 === 1)" :key="item.key" :src="item.url"
+            :alt="item.key" class="my-2" cover draggable="false" lazy @click="handleImageClick(item.url)" />
+        </v-col>
+      </v-row>
     </v-col>
   </v-row>
 
@@ -52,7 +77,6 @@ const {
 
 <style scoped>
 .photo-img {
-  border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
   transition: box-shadow 0.3s ease;
   cursor: pointer;
